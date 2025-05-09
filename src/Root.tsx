@@ -1,0 +1,1 @@
+// This file is no longer needed as we're handling routing in main.tsx 
