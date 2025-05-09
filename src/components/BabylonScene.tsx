@@ -25,6 +25,7 @@ import {
   EasingFunction,
 } from '@babylonjs/core';
 import { useMediaQuery } from 'react-responsive';
+import ThreeGlobe from './ThreeGlobe';
 
 interface BabylonSceneProps {
   type: 'globe' | 'skills' | 'project' | 'contact';
@@ -45,30 +46,64 @@ const BabylonScene: React.FC<BabylonSceneProps> = ({ type, className, scrollProg
   const orbitAngleRef = useRef(0);
 
   const createGlobe = (scene: Scene) => {
-    // Create the main globe with grid texture
-    const sphere = MeshBuilder.CreateSphere('globe', { diameter: 2 }, scene);
+    // Create the main globe with enhanced grid texture
+    const sphere = MeshBuilder.CreateSphere('globe', { diameter: 2, segments: 64 }, scene);
     globeRef.current = sphere;
     
     const material = new StandardMaterial('globeMaterial', scene);
     material.emissiveColor = new Color3(0, 0.5, 0.5);
     material.alpha = 0.8;
     
-    // Create grid texture
-    const gridTexture = new DynamicTexture('gridTexture', 512, scene);
+    // Create enhanced grid texture with glow effect
+    const gridTexture = new DynamicTexture('gridTexture', 1024, scene);
     const ctx = gridTexture.getContext() as CanvasRenderingContext2D;
+    
+    // Draw main grid lines
     ctx.strokeStyle = 'rgba(0, 255, 255, 0.3)';
     ctx.lineWidth = 1;
     
-    // Draw grid lines
-    for (let i = 0; i < 512; i += 32) {
+    // Draw primary grid
+    for (let i = 0; i < 1024; i += 64) {
       ctx.beginPath();
       ctx.moveTo(i, 0);
-      ctx.lineTo(i, 512);
+      ctx.lineTo(i, 1024);
       ctx.stroke();
       
       ctx.beginPath();
       ctx.moveTo(0, i);
-      ctx.lineTo(512, i);
+      ctx.lineTo(1024, i);
+      ctx.stroke();
+    }
+    
+    // Draw secondary grid with glow
+    ctx.strokeStyle = 'rgba(0, 255, 255, 0.15)';
+    ctx.lineWidth = 0.5;
+    for (let i = 0; i < 1024; i += 32) {
+      ctx.beginPath();
+      ctx.moveTo(i, 0);
+      ctx.lineTo(i, 1024);
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.moveTo(0, i);
+      ctx.lineTo(1024, i);
+      ctx.stroke();
+    }
+    
+    // Add glow effect
+    ctx.shadowColor = 'rgba(0, 255, 255, 0.5)';
+    ctx.shadowBlur = 10;
+    ctx.strokeStyle = 'rgba(0, 255, 255, 0.2)';
+    ctx.lineWidth = 2;
+    for (let i = 0; i < 1024; i += 128) {
+      ctx.beginPath();
+      ctx.moveTo(i, 0);
+      ctx.lineTo(i, 1024);
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.moveTo(0, i);
+      ctx.lineTo(1024, i);
       ctx.stroke();
     }
     
@@ -76,7 +111,18 @@ const BabylonScene: React.FC<BabylonSceneProps> = ({ type, className, scrollProg
     material.emissiveTexture = gridTexture;
     sphere.material = material;
 
-    // Create skill icons
+    // Add pulsing glow effect
+    scene.registerBeforeRender(() => {
+      const time = scene.getEngine().getDeltaTime() / 1000;
+      material.alpha = 0.8 + Math.sin(time * 2) * 0.1;
+      material.emissiveColor = new Color3(
+        0,
+        0.5 + Math.sin(time * 1.5) * 0.1,
+        0.5 + Math.sin(time * 1.5) * 0.1
+      );
+    });
+
+    // Create skill icons with enhanced effects
     createSkillIcons(scene);
   };
 
@@ -224,7 +270,7 @@ const BabylonScene: React.FC<BabylonSceneProps> = ({ type, className, scrollProg
   }, [isMobileQuery]);
 
   useEffect(() => {
-    if (!canvasRef.current || isMobile) return;
+    if (!canvasRef.current || isMobile || type === 'globe') return;
 
     try {
       const engine = new Engine(canvasRef.current, true, {
@@ -281,10 +327,6 @@ const BabylonScene: React.FC<BabylonSceneProps> = ({ type, className, scrollProg
 
       // Scene-specific setup
       switch (type) {
-        case 'globe':
-          createGlobe(scene);
-          createDataParticles(scene);
-          break;
         case 'skills':
           createSkillsCloud(scene);
           break;
@@ -335,7 +377,7 @@ const BabylonScene: React.FC<BabylonSceneProps> = ({ type, className, scrollProg
 
   // Update scene when scrollProgress changes with improved animation
   useEffect(() => {
-    if (!sceneRef.current || !cameraRef.current) return;
+    if (!sceneRef.current || !cameraRef.current || type === 'globe') return;
 
     // Smooth camera zoom
     const startRadius = 10;
@@ -381,26 +423,11 @@ const BabylonScene: React.FC<BabylonSceneProps> = ({ type, className, scrollProg
       const newRotation = Vector3.Lerp(currentRotation, targetRotation, 0.1);
       icon.setDirection(newRotation);
     });
-  }, [scrollProgress]);
+  }, [scrollProgress, type]);
 
-  // Add the orbit update to the scene's beforeRender with improved performance
-  useEffect(() => {
-    let observer: any = null;
-    if (sceneRef.current) {
-      observer = sceneRef.current.registerBeforeRender(() => {
-        if (type === 'globe' && globeRef.current) {
-          // Update globe rotation with smooth easing
-          const targetRotation = globeRef.current.rotation.y + 0.001;
-          globeRef.current.rotation.y += (targetRotation - globeRef.current.rotation.y) * 0.1;
-        }
-      });
-    }
-    return () => {
-      if (sceneRef.current && observer) {
-        sceneRef.current.unregisterBeforeRender(observer);
-      }
-    };
-  }, [type]);
+  if (type === 'globe') {
+    return <ThreeGlobe className={className} scrollProgress={scrollProgress} />;
+  }
 
   if (isMobile) {
     return (
@@ -504,16 +531,17 @@ const createCyberpunkGrid = (scene: Scene) => {
   createDecorativeElement(new Vector3(8, -1.9, 8), 0.5);
 };
 
-// Enhanced data particles
+// Enhanced data particles with better visual effects
 const createDataParticles = (scene: Scene) => {
-  const particleSystem = new ParticleSystem('particles', 2000, scene);
+  const particleSystem = new ParticleSystem('particles', 3000, scene);
   particleSystem.particleTexture = new Texture('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QUM2OEZDQTQ4RTU0MTFFMTlBNkQ5OTNBN0FFQzM5QjQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QUM2OEZDQTU4RTU0MTFFMTlBNkQ5OTNBN0FFQzM5QjQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpBQzY4RkNBMjhFNTQxMUUxOUE2RDk5M0E3QUVDMzlCNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpBQzY4RkNBMzhFNTQxMUUxOUE2RDk5M0E3QUVDMzlCNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PvXJ8OMAAAAmSURBVHjaYvz//z8DJYAFxjh16hSDiYkJw7t37xgYGRkZGBgYGADhZwMDAJg6BQAAAABJRU5ErkJggg==', scene);
   
   particleSystem.emitter = new Vector3(0, 0, 0);
   particleSystem.minEmitBox = new Vector3(-10, -10, -10);
   particleSystem.maxEmitBox = new Vector3(10, 10, 10);
   
-  particleSystem.color1 = new Color4(0, 0.5, 0.5, 1.0);
+  // Enhanced particle colors with gradient
+  particleSystem.color1 = new Color4(0, 0.8, 0.8, 1.0);
   particleSystem.color2 = new Color4(0, 0.5, 0.5, 1.0);
   particleSystem.colorDead = new Color4(0, 0, 0, 0.0);
   
@@ -523,26 +551,41 @@ const createDataParticles = (scene: Scene) => {
   particleSystem.minLifeTime = 0.3;
   particleSystem.maxLifeTime = 1.5;
   
-  particleSystem.emitRate = 500;
+  particleSystem.emitRate = 1000;
   
   particleSystem.blendMode = ParticleSystem.BLENDMODE_ONEONE;
   
   particleSystem.gravity = new Vector3(0, -0.1, 0);
   
-  particleSystem.direction1 = new Vector3(-1, -1, -1);
-  particleSystem.direction2 = new Vector3(1, 1, 1);
+  // Enhanced particle movement
+  particleSystem.direction1 = new Vector3(-2, -2, -2);
+  particleSystem.direction2 = new Vector3(2, 2, 2);
   
   particleSystem.minAngularSpeed = 0;
-  particleSystem.maxAngularSpeed = Math.PI;
+  particleSystem.maxAngularSpeed = Math.PI * 2;
   
   particleSystem.minEmitPower = 1;
   particleSystem.maxEmitPower = 3;
   particleSystem.updateSpeed = 0.01;
 
-  // Add particle animation
+  // Add dynamic particle animation
   scene.registerBeforeRender(() => {
     const time = scene.getEngine().getDeltaTime() / 1000;
-    particleSystem.emitRate = 500 + Math.sin(time * 2) * 100;
+    particleSystem.emitRate = 1000 + Math.sin(time * 2) * 200;
+    
+    // Dynamic color changes
+    particleSystem.color1 = new Color4(
+      0,
+      0.8 + Math.sin(time) * 0.2,
+      0.8 + Math.sin(time) * 0.2,
+      1.0
+    );
+    particleSystem.color2 = new Color4(
+      0,
+      0.5 + Math.sin(time * 1.5) * 0.1,
+      0.5 + Math.sin(time * 1.5) * 0.1,
+      1.0
+    );
   });
   
   particleSystem.start();

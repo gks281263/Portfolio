@@ -65,8 +65,14 @@ const Navbar: React.FC = () => {
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 100,
+          damping: 20,
+          mass: 1
+        }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
             ? 'bg-background/90 backdrop-blur-xl shadow-lg border-b border-border/10'
@@ -75,33 +81,53 @@ const Navbar: React.FC = () => {
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-20">
-            <Link 
-              to="/" 
-              className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent hover:scale-105 transition-transform"
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              GK
-            </Link>
+              <Link 
+                to="/" 
+                className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent"
+              >
+                GK
+              </Link>
+            </motion.div>
 
             <div className="hidden md:flex items-center space-x-1">
-              {navLinks.map((link) => (
-                <button
+              {navLinks.map((link, index) => (
+                <motion.button
                   key={link.path}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    delay: index * 0.1,
+                    duration: 0.5,
+                    ease: [0.4, 0, 0.2, 1]
+                  }}
                   onClick={() => handleNavClick(link.path)}
                   className={`relative px-4 py-2 rounded-full text-foreground hover:text-primary transition-all duration-300 ${
                     isActive(link.path) 
                       ? 'text-primary font-medium' 
                       : 'hover:bg-primary/5'
                   }`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   {link.label}
                   {isActive(link.path) && (
                     <motion.div
                       layoutId="navbar-indicator"
                       className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-primary/70"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 30,
+                        mass: 1
+                      }}
                     />
                   )}
-                </button>
+                </motion.button>
               ))}
             </div>
 

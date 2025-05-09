@@ -409,91 +409,110 @@ const Home: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.15),transparent_50%)]" />
               
-              <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="text-4xl font-bold mb-8 text-foreground"
-              >
-                About Me
-              </motion.h2>
-              
-              <motion.div className="space-y-6">
+              <div className="flex flex-col md:flex-row gap-8 items-center">
+                {/* Profile Picture */}
                 <motion.div
-                  className="relative"
-                  style={{
-                    opacity: line1Progress,
-                    filter: useTransform(line1Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
-                    y: useTransform(line1Progress, [0, 1], [20, 0])
-                  }}
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-primary/20 shadow-lg"
                 >
-                  <motion.p 
-                    className="text-foreground/80 text-xl leading-relaxed"
-                    style={{
-                      background: useTransform(
-                        line1Progress,
-                        [0, 1],
-                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
-                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
-                      )
-                    }}
-                  >
-                    I am a passionate Cybersecurity Analyst and Web Developer with expertise in creating secure, 
-                    performant applications. My focus is on implementing robust security measures while ensuring 
-                    optimal user experience.
-                  </motion.p>
-                </motion.div>
-                
-                <motion.div
-                  className="relative"
-                  style={{
-                    opacity: line2Progress,
-                    filter: useTransform(line2Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
-                    y: useTransform(line2Progress, [0, 1], [20, 0])
-                  }}
-                >
-                  <motion.p 
-                    className="text-foreground/80 text-xl leading-relaxed"
-                    style={{
-                      background: useTransform(
-                        line2Progress,
-                        [0, 1],
-                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
-                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
-                      )
-                    }}
-                  >
-                    With a strong foundation in modern web technologies and security best practices, 
-                    I specialize in developing applications that are not only visually appealing but also 
-                    fortified against potential threats.
-                  </motion.p>
+                  <img
+                    src="https://media.licdn.com/dms/image/v2/D4D03AQEiQYtYRyscxA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1722104835765?e=1752105600&v=beta&t=35nSckmzZeJhb7L3FRh3nyGUlYq6DWd2qP1R3UIx0DM"
+                    alt="Gaurav Kumar"
+                    className="w-full h-full object-cover"
+                  />
                 </motion.div>
 
-                <motion.div
-                  className="relative"
-                  style={{
-                    opacity: line3Progress,
-                    filter: useTransform(line3Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
-                    y: useTransform(line3Progress, [0, 1], [20, 0])
-                  }}
-                >
-                  <motion.p 
-                    className="text-foreground/80 text-xl leading-relaxed"
-                    style={{
-                      background: useTransform(
-                        line3Progress,
-                        [0, 1],
-                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
-                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
-                      )
-                    }}
+                <div className="flex-1">
+                  <motion.h2 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="text-4xl font-bold mb-8 text-foreground"
                   >
-                    My approach combines technical excellence with a deep understanding of security protocols, 
-                    ensuring that every project I work on meets the highest standards of both functionality and security.
-                  </motion.p>
-                </motion.div>
-              </motion.div>
+                    About Me
+                  </motion.h2>
+                  
+                  <motion.div className="space-y-6">
+                    <motion.div
+                      className="relative"
+                      style={{
+                        opacity: line1Progress,
+                        filter: useTransform(line1Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(line1Progress, [0, 1], [20, 0])
+                      }}
+                    >
+                      <motion.p 
+                        className="text-foreground/80 text-xl leading-relaxed"
+                        style={{
+                          background: useTransform(
+                            line1Progress,
+                            [0, 1],
+                            ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                             'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                          )
+                        }}
+                      >
+                        I am a passionate Cybersecurity Analyst and Web Developer with expertise in creating secure, 
+                        performant applications. My focus is on implementing robust security measures while ensuring 
+                        optimal user experience.
+                      </motion.p>
+                    </motion.div>
+                    
+                    <motion.div
+                      className="relative"
+                      style={{
+                        opacity: line2Progress,
+                        filter: useTransform(line2Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(line2Progress, [0, 1], [20, 0])
+                      }}
+                    >
+                      <motion.p 
+                        className="text-foreground/80 text-xl leading-relaxed"
+                        style={{
+                          background: useTransform(
+                            line2Progress,
+                            [0, 1],
+                            ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                             'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                          )
+                        }}
+                      >
+                        With a strong foundation in modern web technologies and security best practices, 
+                        I specialize in developing applications that are not only visually appealing but also 
+                        fortified against potential threats.
+                      </motion.p>
+                    </motion.div>
+
+                    <motion.div
+                      className="relative"
+                      style={{
+                        opacity: line3Progress,
+                        filter: useTransform(line3Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(line3Progress, [0, 1], [20, 0])
+                      }}
+                    >
+                      <motion.p 
+                        className="text-foreground/80 text-xl leading-relaxed"
+                        style={{
+                          background: useTransform(
+                            line3Progress,
+                            [0, 1],
+                            ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                             'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                          )
+                        }}
+                      >
+                        My approach combines technical excellence with a deep understanding of security protocols, 
+                        ensuring that every project I work on meets the highest standards of both functionality and security.
+                      </motion.p>
+                    </motion.div>
+                  </motion.div>
+                </div>
+              </div>
 
               <div className="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-primary/30" />
               <div className="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-primary/30" />

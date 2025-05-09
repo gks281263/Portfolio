@@ -18,12 +18,14 @@
     "@heroicons/react": "^2.2.0",
     "@tailwindcss/typography": "^0.5.16",
     "@types/react-responsive": "^8.0.8",
+    "@types/three": "^0.176.0",
     "framer-motion": "^12.10.4",
     "react": "^19.1.0",
     "react-babylonjs": "^3.2.4",
     "react-dom": "^19.1.0",
     "react-responsive": "^10.0.1",
     "react-router-dom": "^7.6.0",
+    "three": "^0.176.0",
     "typewriter-effect": "^2.22.0"
   },
   "devDependencies": {
