@@ -499,7 +499,7 @@ const Home: React.FC = () => {
       <section 
         id="about" 
         ref={aboutRef} 
-        className="section min-h-[90vh] flex items-center justify-center py-8 bg-background/50 backdrop-blur-sm"
+        className="section min-h-[80vh] flex items-center justify-center py-6 bg-background/50 backdrop-blur-sm"
       >
         <div className="container max-w-6xl">
           <motion.div
@@ -626,7 +626,7 @@ const Home: React.FC = () => {
       <section 
         id="education" 
         ref={educationRef}
-        className="section min-h-[90vh] flex items-center justify-center py-8 bg-background/50 backdrop-blur-sm"
+        className="section min-h-[80vh] flex items-center justify-center py-6 bg-background/50 backdrop-blur-sm"
       >
         <div className="container max-w-6xl">
           <motion.div
@@ -729,7 +729,7 @@ const Home: React.FC = () => {
       <section 
         id="experience" 
         ref={experienceRef}
-        className="section min-h-[90vh] flex items-center justify-center py-8 bg-background/50 backdrop-blur-sm"
+        className="section min-h-[80vh] flex items-center justify-center py-6 bg-background/50 backdrop-blur-sm"
       >
         <div className="container max-w-6xl">
           <motion.div
@@ -867,7 +867,7 @@ const Home: React.FC = () => {
       <section 
         id="certifications" 
         ref={certificationsRef}
-        className="section min-h-[90vh] flex items-center justify-center py-8 bg-background/50 backdrop-blur-sm"
+        className="section min-h-[80vh] flex items-center justify-center py-6 bg-background/50 backdrop-blur-sm"
       >
         <div className="container max-w-6xl">
           <motion.div

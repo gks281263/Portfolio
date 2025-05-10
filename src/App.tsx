@@ -5,7 +5,6 @@ import Footer from './components/Footer';
 import MobileMenu from './components/MobileMenu';
 import ScrollToTop from './components/ScrollToTop';
 import Loading from './components/Loading';
-import ThemeToggle from './components/ThemeToggle';
 import Navbar from './components/Navbar';
 import ThemeProvider from './components/ThemeProvider';
 
@@ -42,7 +41,6 @@ const App: React.FC = () => {
         </main>
         <Footer />
         <ScrollToTop />
-        <ThemeToggle />
         <MobileMenu 
           isOpen={isMobileMenuOpen}
           onClose={() => setIsMobileMenuOpen(false)}
