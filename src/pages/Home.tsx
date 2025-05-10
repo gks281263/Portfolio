@@ -557,9 +557,7 @@ const Home: React.FC = () => {
                       )
                     }}
                   >
-                    I am a passionate Cybersecurity Analyst and Web Developer with expertise in creating secure, 
-                    performant applications. My focus is on implementing robust security measures while ensuring 
-                    optimal user experience.
+                    I am a results-driven Cybersecurity Analyst and Full-Stack Developer, dedicated to building secure, high-performance digital solutions. My expertise lies in integrating robust security protocols with seamless user experiences, ensuring every application is both resilient and intuitive.
                   </motion.p>
                 </motion.div>
                 
@@ -582,9 +580,7 @@ const Home: React.FC = () => {
                       )
                     }}
                   >
-                    With a strong foundation in modern web technologies and security best practices, 
-                    I specialize in developing applications that are not only visually appealing but also 
-                    fortified against potential threats.
+                    With a deep command of modern web technologies and cybersecurity best practices, I specialize in architecting applications that are visually compelling and fortified against evolving threats. My work is defined by a commitment to excellence, innovation, and proactive risk mitigation.
                   </motion.p>
                 </motion.div>
 
@@ -607,8 +603,7 @@ const Home: React.FC = () => {
                       )
                     }}
                   >
-                    My approach combines technical excellence with a deep understanding of security protocols, 
-                    ensuring that every project I work on meets the highest standards of both functionality and security.
+                    I combine technical mastery with a strategic mindset, delivering projects that exceed expectations in both functionality and security. My mission is to empower organizations with solutions that are not only effective but also future-proof.
                   </motion.p>
                 </motion.div>
               </motion.div>
@@ -667,7 +662,7 @@ const Home: React.FC = () => {
                       )
                     }}
                   >
-                    BTech in Computer Science (Cyber Security)
+                    Bachelor of Technology in Computer Science, Specialization in Cyber Security
                   </motion.p>
                 </motion.div>
                 
@@ -823,7 +818,7 @@ const Home: React.FC = () => {
                         y: useTransform(experienceLine3Progress, [0.3, 0.4], [20, 0])
                       }}
                     >
-                      Built two full-stack marketing websites using PHP with order processing and SEO features.
+                      Engineered and launched two full-stack marketing platforms with advanced order processing and SEO optimization, driving measurable business growth.
                     </motion.li>
                     <motion.li
                       style={{
@@ -832,7 +827,7 @@ const Home: React.FC = () => {
                         y: useTransform(experienceLine3Progress, [0.4, 0.5], [20, 0])
                       }}
                     >
-                      Automated Instagram account management and internal workflows via Python and Google Sheets, reducing manual tasks by 90%.
+                      Automated Instagram account management and internal workflows using Python and Google Sheets, reducing manual workload by 90% and boosting operational efficiency.
                     </motion.li>
                     <motion.li
                       style={{
@@ -841,7 +836,7 @@ const Home: React.FC = () => {
                         y: useTransform(experienceLine3Progress, [0.5, 0.6], [20, 0])
                       }}
                     >
-                      Managed a 15-person marketing team and improved operational efficiency by 30%.
+                      Led and mentored a 15-member marketing team, fostering a culture of innovation and achieving a 30% improvement in team productivity.
                     </motion.li>
                     <motion.li
                       style={{
@@ -850,7 +845,7 @@ const Home: React.FC = () => {
                         y: useTransform(experienceLine3Progress, [0.6, 0.7], [20, 0])
                       }}
                     >
-                      Strengthened brand consistency and improved digital presence across platforms.
+                      Strengthened brand identity and digital presence across multiple platforms, resulting in increased engagement and market reach.
                     </motion.li>
                   </motion.ul>
                 </motion.div>
@@ -890,7 +885,7 @@ const Home: React.FC = () => {
               
               <motion.div className="space-y-6">
                 <motion.div
-                  className="relative"
+                  className="relative group"
                   style={{
                     opacity: certificationsLine1Progress,
                     filter: useTransform(certificationsLine1Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
@@ -898,7 +893,7 @@ const Home: React.FC = () => {
                   }}
                 >
                   <motion.p 
-                    className="text-foreground/80 text-xl leading-relaxed"
+                    className="text-foreground/80 text-xl leading-relaxed flex items-center gap-3 cursor-pointer relative"
                     style={{
                       background: useTransform(
                         certificationsLine1Progress,
@@ -907,8 +902,15 @@ const Home: React.FC = () => {
                          'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
                       )
                     }}
+                    onClick={() => window.open('/Portfolio/PAC.png', '_blank')}
                   >
-                    Cybersecurity Foundation
+                    Cybersecurity Foundation – Palo Alto Networks Academy
+                    <span className="relative group">
+                      <span className="ml-2 underline text-primary hover:text-primary/80 transition-colors">(View Certificate)</span>
+                      <span className="absolute left-1/2 top-full z-20 hidden group-hover:block group-focus:block w-64 p-2 bg-background border border-border rounded-lg shadow-lg mt-2 -translate-x-1/2 animate-fade-in">
+                        <img src="/Portfolio/PAC.png" alt="PAC Certificate Preview" className="w-full h-auto rounded-md object-contain" />
+                      </span>
+                    </span>
                   </motion.p>
                 </motion.div>
                 
@@ -931,7 +933,7 @@ const Home: React.FC = () => {
                       )
                     }}
                   >
-                    Palo Alto Networks Academy
+                    Credential ID: 3ymKKfahiz
                   </motion.p>
                 </motion.div>
 
@@ -985,7 +987,7 @@ const Home: React.FC = () => {
           >
             <h2 className="text-4xl font-bold text-foreground mb-4">Skills & Expertise</h2>
             <p className="text-foreground/60 max-w-2xl mx-auto">
-              A comprehensive collection of technologies and tools I work with to build secure and efficient solutions.
+              A curated portfolio of technologies and tools I leverage to deliver secure, scalable, and innovative solutions in cybersecurity and software development.
             </p>
           </motion.div>
 
@@ -1060,7 +1062,7 @@ const Home: React.FC = () => {
           >
             <h2 className="text-4xl font-bold text-foreground mb-4">Featured Projects</h2>
             <p className="text-foreground/60 max-w-2xl mx-auto">
-              Explore my recent work in cybersecurity and web development, showcasing innovative solutions and best practices.
+              Explore a selection of my recent work, demonstrating advanced problem-solving, secure architecture, and real-world impact in cybersecurity and web development.
             </p>
           </motion.div>
 
@@ -1154,7 +1156,7 @@ const Home: React.FC = () => {
           >
             <h2 className="text-4xl font-bold text-foreground mb-4">Get in Touch</h2>
             <p className="text-foreground/60 max-w-2xl mx-auto">
-              Let's connect and discuss how we can work together to create secure and innovative solutions.
+              Ready to collaborate or discuss how I can contribute to your next project? Let's connect and create secure, innovative solutions together.
             </p>
           </motion.div>
 
