@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
       setIsScrolled(window.scrollY > 50);
 
       // Get all sections
-      const sections = ['#about', '#skills', '#projects', '#contact'];
+      const sections = ['#about', '#education', '#experience', '#certifications', '#skills', '#projects', '#contact'];
       
       // Find the current section
       const currentSection = sections.find(section => {
@@ -42,6 +42,9 @@ const Navbar: React.FC = () => {
 
   const navLinks = [
     { path: '#about', label: 'About' },
+    { path: '#education', label: 'Education' },
+    { path: '#experience', label: 'Experience' },
+    { path: '#certifications', label: 'Certifications' },
     { path: '#skills', label: 'Skills' },
     { path: '#projects', label: 'Projects' },
     { path: '#contact', label: 'Contact' },
@@ -86,12 +89,12 @@ const Navbar: React.FC = () => {
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <Link 
-                to="/" 
+            <Link 
+              to="/" 
                 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent"
-              >
-                GK
-              </Link>
+            >
+              GK
+            </Link>
             </motion.div>
 
             <div className="hidden md:flex items-center space-x-1">

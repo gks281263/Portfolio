@@ -15,7 +15,7 @@ interface Skill {
   name: string;
   logo: string;
   color: string;
-  category: 'Languages' | 'Frameworks' | 'Security' | 'DevOps';
+  category: 'Languages' | 'Frameworks' | 'Security' | 'DevOps' | 'Soft Skills';
 }
 
 const skills: Skill[] = [
@@ -136,30 +136,56 @@ const skills: Skill[] = [
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
     color: '#2496ED',
     category: 'DevOps'
+  },
+  // Soft Skills
+  { 
+    name: 'Project Management', 
+    logo: 'https://cdn-icons-png.flaticon.com/512/1534/1534939.png',
+    color: '#4A90E2',
+    category: 'Soft Skills'
+  },
+  { 
+    name: 'Team Leadership', 
+    logo: 'https://cdn-icons-png.flaticon.com/512/1534/1534939.png',
+    color: '#4A90E2',
+    category: 'Soft Skills'
+  },
+  { 
+    name: 'Decision-Making', 
+    logo: 'https://cdn-icons-png.flaticon.com/512/1534/1534939.png',
+    color: '#4A90E2',
+    category: 'Soft Skills'
   }
 ];
 
 const projects: Project[] = [
   {
-    title: 'Secure Web Application',
-    description: 'Developed a secure web application with authentication, authorization, and data encryption. Implemented OWASP security best practices and conducted penetration testing.',
-    technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT'],
-    image: '/projects/secure-web.jpg',
-    link: 'https://github.com/yourusername/secure-web'
+    title: 'Telegram Keylogger (Rust)',
+    description: 'Developed a keylogger for ethical research purposes using Rust, sending secure logs to Telegram via Bot API.',
+    technologies: ['Rust', 'Telegram Bot API'],
+    image: '/projects/keylogger.jpg',
+    link: 'https://github.com/yourusername/telegram-keylogger'
   },
   {
-    title: 'Network Security Monitoring Tool',
-    description: 'Created a real-time network monitoring tool that detects and alerts on suspicious activities. Integrated with SIEM systems and implemented automated incident response.',
-    technologies: ['Python', 'Wireshark', 'Elasticsearch', 'Kibana'],
-    image: '/projects/network-monitor.jpg',
-    link: 'https://github.com/yourusername/network-monitor'
+    title: 'E-Commerce Platform (Django)',
+    description: 'Built a secure e-commerce web app with user authentication, product management, and an admin panel.',
+    technologies: ['Django', 'Python', 'PostgreSQL', 'Bootstrap'],
+    image: '/projects/ecommerce.jpg',
+    link: 'https://github.com/yourusername/ecommerce-platform'
   },
   {
-    title: 'Automated Security Testing Framework',
-    description: 'Built an automated security testing framework that performs vulnerability scanning and generates detailed reports. Supports multiple security tools and custom test cases.',
-    technologies: ['Python', 'Docker', 'OWASP ZAP', 'Jenkins'],
-    image: '/projects/security-testing.jpg',
-    link: 'https://github.com/yourusername/security-testing'
+    title: 'Peer-to-Peer Lending Platform (React + Django)',
+    description: 'Developed a platform where users can securely lend and rent various items, with dynamic user interfaces and backend integration.',
+    technologies: ['React', 'Django', 'REST API', 'PostgreSQL'],
+    image: '/projects/p2p-lending.jpg',
+    link: 'https://github.com/yourusername/p2p-lending'
+  },
+  {
+    title: 'Anonymous Chat Website (Node.js + WebSocket)',
+    description: 'Real-time anonymous chat tool, similar to Omegle, built using Node.js and WebSocket.',
+    technologies: ['Node.js', 'WebSocket', 'Express', 'MongoDB'],
+    image: '/projects/chat.jpg',
+    link: 'https://github.com/yourusername/anonymous-chat'
   }
 ];
 
@@ -174,6 +200,9 @@ const Home: React.FC = () => {
   const [isAboutSectionLocked, setIsAboutSectionLocked] = useState(false);
 
   const aboutRef = useRef<HTMLDivElement>(null);
+  const educationRef = useRef<HTMLDivElement>(null);
+  const experienceRef = useRef<HTMLDivElement>(null);
+  const certificationsRef = useRef<HTMLDivElement>(null);
   const skillsRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
@@ -184,20 +213,92 @@ const Home: React.FC = () => {
     offset: ["start end", "end start"]
   });
 
-  // Enhanced scale animation with more zoom
-  const scale = useSpring(useTransform(aboutScrollProgress, [0, 0.3], [0.85, 1.1]), {
+  // Scroll progress for Education section
+  const { scrollYProgress: educationScrollProgress } = useScroll({
+    target: educationRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Scroll progress for Experience section
+  const { scrollYProgress: experienceScrollProgress } = useScroll({
+    target: experienceRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Scroll progress for Certifications section
+  const { scrollYProgress: certificationsScrollProgress } = useScroll({
+    target: certificationsRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Enhanced scale animation with more zoom for About section
+  const aboutScale = useSpring(useTransform(aboutScrollProgress, [0, 0.3], [0.85, 1.1]), {
     stiffness: 100,
     damping: 30
   });
 
-  // Line highlight progress - starting after zoom completes
-  const line1Progress = useTransform(aboutScrollProgress, [0.3, 0.4], [0, 1]);
-  const line2Progress = useTransform(aboutScrollProgress, [0.4, 0.5], [0, 1]);
-  const line3Progress = useTransform(aboutScrollProgress, [0.5, 0.6], [0, 1]);
+  // Enhanced scale animation with more zoom for Education section
+  const educationScale = useSpring(useTransform(educationScrollProgress, [0, 0.3], [0.85, 1.1]), {
+    stiffness: 100,
+    damping: 30
+  });
 
-  // Track overall highlight progress
-  const totalHighlightProgress = useTransform(
+  // Enhanced scale animation with more zoom for Experience section
+  const experienceScale = useSpring(useTransform(experienceScrollProgress, [0, 0.3], [0.85, 1.1]), {
+    stiffness: 100,
+    damping: 30
+  });
+
+  // Enhanced scale animation with more zoom for Certifications section
+  const certificationsScale = useSpring(useTransform(certificationsScrollProgress, [0, 0.3], [0.85, 1.1]), {
+    stiffness: 100,
+    damping: 30
+  });
+
+  // Line highlight progress for About section
+  const aboutLine1Progress = useTransform(aboutScrollProgress, [0.3, 0.4], [0, 1]);
+  const aboutLine2Progress = useTransform(aboutScrollProgress, [0.4, 0.5], [0, 1]);
+  const aboutLine3Progress = useTransform(aboutScrollProgress, [0.5, 0.6], [0, 1]);
+
+  // Line highlight progress for Education section
+  const educationLine1Progress = useTransform(educationScrollProgress, [0.3, 0.4], [0, 1]);
+  const educationLine2Progress = useTransform(educationScrollProgress, [0.4, 0.5], [0, 1]);
+  const educationLine3Progress = useTransform(educationScrollProgress, [0.5, 0.6], [0, 1]);
+
+  // Line highlight progress for Experience section
+  const experienceLine1Progress = useTransform(experienceScrollProgress, [0.3, 0.4], [0, 1]);
+  const experienceLine2Progress = useTransform(experienceScrollProgress, [0.4, 0.5], [0, 1]);
+  const experienceLine3Progress = useTransform(experienceScrollProgress, [0.5, 0.6], [0, 1]);
+
+  // Line highlight progress for Certifications section
+  const certificationsLine1Progress = useTransform(certificationsScrollProgress, [0.3, 0.4], [0, 1]);
+  const certificationsLine2Progress = useTransform(certificationsScrollProgress, [0.4, 0.5], [0, 1]);
+  const certificationsLine3Progress = useTransform(certificationsScrollProgress, [0.5, 0.6], [0, 1]);
+
+  // Track overall highlight progress for About section
+  const aboutTotalHighlightProgress = useTransform(
     aboutScrollProgress,
+    [0.3, 0.6],
+    [0, 1]
+  );
+
+  // Track overall highlight progress for Education section
+  const educationTotalHighlightProgress = useTransform(
+    educationScrollProgress,
+    [0.3, 0.6],
+    [0, 1]
+  );
+
+  // Track overall highlight progress for Experience section
+  const experienceTotalHighlightProgress = useTransform(
+    experienceScrollProgress,
+    [0.3, 0.6],
+    [0, 1]
+  );
+
+  // Track overall highlight progress for Certifications section
+  const certificationsTotalHighlightProgress = useTransform(
+    certificationsScrollProgress,
     [0.3, 0.6],
     [0, 1]
   );
@@ -214,7 +315,7 @@ const Home: React.FC = () => {
       const isInView = rect.top <= 0 && rect.bottom >= window.innerHeight;
 
       if (isInView) {
-        const progress = totalHighlightProgress.get();
+        const progress = aboutTotalHighlightProgress.get();
         if (progress < 0.8) {
           e.preventDefault();
           // Allow controlled scrolling within the section
@@ -228,7 +329,7 @@ const Home: React.FC = () => {
 
     window.addEventListener('wheel', handleScroll, { passive: false });
     return () => window.removeEventListener('wheel', handleScroll);
-  }, [isAboutSectionLocked, totalHighlightProgress]);
+  }, [isAboutSectionLocked, aboutTotalHighlightProgress]);
 
   // Set scroll lock when entering About section
   useEffect(() => {
@@ -398,12 +499,12 @@ const Home: React.FC = () => {
       <section 
         id="about" 
         ref={aboutRef} 
-        className="section min-h-[120vh] flex items-center justify-center py-20 bg-background/50 backdrop-blur-sm"
+        className="section min-h-[90vh] flex items-center justify-center py-8 bg-background/50 backdrop-blur-sm"
       >
-        <div className="container">
+        <div className="container max-w-6xl">
           <motion.div
-            style={{ scale }}
-            className="max-w-4xl mx-auto"
+            style={{ scale: aboutScale }}
+            className="max-w-5xl mx-auto"
           >
             <div className="backdrop-blur-sm bg-background/30 rounded-lg p-12 border border-border/50 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
@@ -426,93 +527,437 @@ const Home: React.FC = () => {
                 </motion.div>
 
                 <div className="flex-1">
-                  <motion.h2 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="text-4xl font-bold mb-8 text-foreground"
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-4xl font-bold mb-8 text-foreground"
+              >
+                About Me
+              </motion.h2>
+              
+              <motion.div className="space-y-6">
+                <motion.div
+                  className="relative"
+                  style={{
+                    opacity: aboutLine1Progress,
+                    filter: useTransform(aboutLine1Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
+                    y: useTransform(aboutLine1Progress, [0, 1], [20, 0])
+                  }}
+                >
+                  <motion.p 
+                    className="text-foreground/80 text-xl leading-relaxed"
+                    style={{
+                      background: useTransform(
+                        aboutLine1Progress,
+                        [0, 1],
+                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                      )
+                    }}
                   >
-                    About Me
-                  </motion.h2>
-                  
-                  <motion.div className="space-y-6">
-                    <motion.div
-                      className="relative"
-                      style={{
-                        opacity: line1Progress,
-                        filter: useTransform(line1Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
-                        y: useTransform(line1Progress, [0, 1], [20, 0])
-                      }}
-                    >
-                      <motion.p 
-                        className="text-foreground/80 text-xl leading-relaxed"
-                        style={{
-                          background: useTransform(
-                            line1Progress,
-                            [0, 1],
-                            ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
-                             'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
-                          )
-                        }}
-                      >
-                        I am a passionate Cybersecurity Analyst and Web Developer with expertise in creating secure, 
-                        performant applications. My focus is on implementing robust security measures while ensuring 
-                        optimal user experience.
-                      </motion.p>
-                    </motion.div>
-                    
-                    <motion.div
-                      className="relative"
-                      style={{
-                        opacity: line2Progress,
-                        filter: useTransform(line2Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
-                        y: useTransform(line2Progress, [0, 1], [20, 0])
-                      }}
-                    >
-                      <motion.p 
-                        className="text-foreground/80 text-xl leading-relaxed"
-                        style={{
-                          background: useTransform(
-                            line2Progress,
-                            [0, 1],
-                            ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
-                             'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
-                          )
-                        }}
-                      >
-                        With a strong foundation in modern web technologies and security best practices, 
-                        I specialize in developing applications that are not only visually appealing but also 
-                        fortified against potential threats.
-                      </motion.p>
-                    </motion.div>
+                    I am a passionate Cybersecurity Analyst and Web Developer with expertise in creating secure, 
+                    performant applications. My focus is on implementing robust security measures while ensuring 
+                    optimal user experience.
+                  </motion.p>
+                </motion.div>
+                
+                <motion.div
+                  className="relative"
+                  style={{
+                    opacity: aboutLine2Progress,
+                    filter: useTransform(aboutLine2Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
+                    y: useTransform(aboutLine2Progress, [0, 1], [20, 0])
+                  }}
+                >
+                  <motion.p 
+                    className="text-foreground/80 text-xl leading-relaxed"
+                    style={{
+                      background: useTransform(
+                        aboutLine2Progress,
+                        [0, 1],
+                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                      )
+                    }}
+                  >
+                    With a strong foundation in modern web technologies and security best practices, 
+                    I specialize in developing applications that are not only visually appealing but also 
+                    fortified against potential threats.
+                  </motion.p>
+                </motion.div>
 
-                    <motion.div
-                      className="relative"
-                      style={{
-                        opacity: line3Progress,
-                        filter: useTransform(line3Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
-                        y: useTransform(line3Progress, [0, 1], [20, 0])
-                      }}
-                    >
-                      <motion.p 
-                        className="text-foreground/80 text-xl leading-relaxed"
-                        style={{
-                          background: useTransform(
-                            line3Progress,
-                            [0, 1],
-                            ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
-                             'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
-                          )
-                        }}
-                      >
-                        My approach combines technical excellence with a deep understanding of security protocols, 
-                        ensuring that every project I work on meets the highest standards of both functionality and security.
-                      </motion.p>
-                    </motion.div>
-                  </motion.div>
+                <motion.div
+                  className="relative"
+                  style={{
+                    opacity: aboutLine3Progress,
+                    filter: useTransform(aboutLine3Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
+                    y: useTransform(aboutLine3Progress, [0, 1], [20, 0])
+                  }}
+                >
+                  <motion.p 
+                    className="text-foreground/80 text-xl leading-relaxed"
+                    style={{
+                      background: useTransform(
+                        aboutLine3Progress,
+                        [0, 1],
+                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                      )
+                    }}
+                  >
+                    My approach combines technical excellence with a deep understanding of security protocols, 
+                    ensuring that every project I work on meets the highest standards of both functionality and security.
+                  </motion.p>
+                </motion.div>
+              </motion.div>
                 </div>
               </div>
+
+              <div className="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-primary/30" />
+              <div className="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-primary/30" />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Education Section */}
+      <section 
+        id="education" 
+        ref={educationRef}
+        className="section min-h-[90vh] flex items-center justify-center py-8 bg-background/50 backdrop-blur-sm"
+      >
+        <div className="container max-w-6xl">
+          <motion.div
+            style={{ scale: educationScale }}
+            className="max-w-5xl mx-auto"
+          >
+            <div className="backdrop-blur-sm bg-background/30 rounded-lg p-12 border border-border/50 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.15),transparent_50%)]" />
+              
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-4xl font-bold mb-8 text-foreground"
+              >
+                Education
+              </motion.h2>
+              
+              <motion.div className="space-y-6">
+                <motion.div
+                  className="relative"
+                  style={{
+                    opacity: educationLine1Progress,
+                    filter: useTransform(educationLine1Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
+                    y: useTransform(educationLine1Progress, [0, 1], [20, 0])
+                  }}
+                >
+                  <motion.p 
+                    className="text-foreground/80 text-xl leading-relaxed"
+                    style={{
+                      background: useTransform(
+                        educationLine1Progress,
+                        [0, 1],
+                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                      )
+                    }}
+                  >
+                    BTech in Computer Science (Cyber Security)
+                  </motion.p>
+                </motion.div>
+                
+                <motion.div
+                  className="relative"
+                  style={{
+                    opacity: educationLine2Progress,
+                    filter: useTransform(educationLine2Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
+                    y: useTransform(educationLine2Progress, [0, 1], [20, 0])
+                  }}
+                >
+                  <motion.p 
+                    className="text-foreground/80 text-xl leading-relaxed"
+                    style={{
+                      background: useTransform(
+                        educationLine2Progress,
+                        [0, 1],
+                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                      )
+                    }}
+                  >
+                    Parul University, Vadodara, Gujarat
+                  </motion.p>
+                </motion.div>
+
+                <motion.div
+                  className="relative"
+                  style={{
+                    opacity: educationLine3Progress,
+                    filter: useTransform(educationLine3Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
+                    y: useTransform(educationLine3Progress, [0, 1], [20, 0])
+                  }}
+                >
+                  <motion.p 
+                    className="text-foreground/80 text-xl leading-relaxed"
+                    style={{
+                      background: useTransform(
+                        educationLine3Progress,
+                        [0, 1],
+                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                      )
+                    }}
+                  >
+                    Expected Graduation: 2028
+                  </motion.p>
+                </motion.div>
+              </motion.div>
+
+              <div className="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-primary/30" />
+              <div className="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-primary/30" />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <section 
+        id="experience" 
+        ref={experienceRef}
+        className="section min-h-[90vh] flex items-center justify-center py-8 bg-background/50 backdrop-blur-sm"
+      >
+        <div className="container max-w-6xl">
+          <motion.div
+            style={{ scale: experienceScale }}
+            className="max-w-5xl mx-auto"
+          >
+            <div className="backdrop-blur-sm bg-background/30 rounded-lg p-12 border border-border/50 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.15),transparent_50%)]" />
+              
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-4xl font-bold mb-8 text-foreground"
+              >
+                Experience
+              </motion.h2>
+              
+              <motion.div className="space-y-6">
+                <motion.div
+                  className="relative"
+                  style={{
+                    opacity: experienceLine1Progress,
+                    filter: useTransform(experienceLine1Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
+                    y: useTransform(experienceLine1Progress, [0, 1], [20, 0])
+                  }}
+                >
+                  <motion.p 
+                    className="text-foreground/80 text-xl leading-relaxed"
+                    style={{
+                      background: useTransform(
+                        experienceLine1Progress,
+                        [0, 1],
+                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                      )
+                    }}
+                  >
+                    Co-Founder – Promotionia (Startup)
+                  </motion.p>
+                </motion.div>
+                
+                <motion.div
+                  className="relative"
+                  style={{
+                    opacity: experienceLine2Progress,
+                    filter: useTransform(experienceLine2Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
+                    y: useTransform(experienceLine2Progress, [0, 1], [20, 0])
+                  }}
+                >
+                  <motion.p 
+                    className="text-foreground/80 text-xl leading-relaxed"
+                    style={{
+                      background: useTransform(
+                        experienceLine2Progress,
+                        [0, 1],
+                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                      )
+                    }}
+                  >
+                    June 2023 – March 2025
+                  </motion.p>
+                </motion.div>
+
+                <motion.div
+                  className="relative"
+                  style={{
+                    opacity: experienceLine3Progress,
+                    filter: useTransform(experienceLine3Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
+                    y: useTransform(experienceLine3Progress, [0, 1], [20, 0])
+                  }}
+                >
+                  <motion.ul 
+                    className="text-foreground/80 text-xl leading-relaxed list-disc list-inside space-y-2"
+                    style={{
+                      background: useTransform(
+                        experienceLine3Progress,
+                        [0, 1],
+                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                      )
+                    }}
+                  >
+                    <motion.li
+                      style={{
+                        opacity: useTransform(experienceLine3Progress, [0.3, 0.4], [0, 1]),
+                        filter: useTransform(experienceLine3Progress, [0.3, 0.4], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine3Progress, [0.3, 0.4], [20, 0])
+                      }}
+                    >
+                      Built two full-stack marketing websites using PHP with order processing and SEO features.
+                    </motion.li>
+                    <motion.li
+                      style={{
+                        opacity: useTransform(experienceLine3Progress, [0.4, 0.5], [0, 1]),
+                        filter: useTransform(experienceLine3Progress, [0.4, 0.5], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine3Progress, [0.4, 0.5], [20, 0])
+                      }}
+                    >
+                      Automated Instagram account management and internal workflows via Python and Google Sheets, reducing manual tasks by 90%.
+                    </motion.li>
+                    <motion.li
+                      style={{
+                        opacity: useTransform(experienceLine3Progress, [0.5, 0.6], [0, 1]),
+                        filter: useTransform(experienceLine3Progress, [0.5, 0.6], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine3Progress, [0.5, 0.6], [20, 0])
+                      }}
+                    >
+                      Managed a 15-person marketing team and improved operational efficiency by 30%.
+                    </motion.li>
+                    <motion.li
+                      style={{
+                        opacity: useTransform(experienceLine3Progress, [0.6, 0.7], [0, 1]),
+                        filter: useTransform(experienceLine3Progress, [0.6, 0.7], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine3Progress, [0.6, 0.7], [20, 0])
+                      }}
+                    >
+                      Strengthened brand consistency and improved digital presence across platforms.
+                    </motion.li>
+                  </motion.ul>
+                </motion.div>
+              </motion.div>
+
+              <div className="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-primary/30" />
+              <div className="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-primary/30" />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Certifications Section */}
+      <section 
+        id="certifications" 
+        ref={certificationsRef}
+        className="section min-h-[90vh] flex items-center justify-center py-8 bg-background/50 backdrop-blur-sm"
+      >
+        <div className="container max-w-6xl">
+          <motion.div
+            style={{ scale: certificationsScale }}
+            className="max-w-5xl mx-auto"
+          >
+            <div className="backdrop-blur-sm bg-background/30 rounded-lg p-12 border border-border/50 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.15),transparent_50%)]" />
+              
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-4xl font-bold mb-8 text-foreground"
+              >
+                Certifications
+              </motion.h2>
+              
+              <motion.div className="space-y-6">
+                <motion.div
+                  className="relative"
+                  style={{
+                    opacity: certificationsLine1Progress,
+                    filter: useTransform(certificationsLine1Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
+                    y: useTransform(certificationsLine1Progress, [0, 1], [20, 0])
+                  }}
+                >
+                  <motion.p 
+                    className="text-foreground/80 text-xl leading-relaxed"
+                    style={{
+                      background: useTransform(
+                        certificationsLine1Progress,
+                        [0, 1],
+                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                      )
+                    }}
+                  >
+                    Cybersecurity Foundation
+                  </motion.p>
+                </motion.div>
+                
+                <motion.div
+                  className="relative"
+                  style={{
+                    opacity: certificationsLine2Progress,
+                    filter: useTransform(certificationsLine2Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
+                    y: useTransform(certificationsLine2Progress, [0, 1], [20, 0])
+                  }}
+                >
+                  <motion.p 
+                    className="text-foreground/80 text-xl leading-relaxed"
+                    style={{
+                      background: useTransform(
+                        certificationsLine2Progress,
+                        [0, 1],
+                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                      )
+                    }}
+                  >
+                    Palo Alto Networks Academy
+                  </motion.p>
+                </motion.div>
+
+                <motion.div
+                  className="relative"
+                  style={{
+                    opacity: certificationsLine3Progress,
+                    filter: useTransform(certificationsLine3Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
+                    y: useTransform(certificationsLine3Progress, [0, 1], [20, 0])
+                  }}
+                >
+                  <motion.p 
+                    className="text-foreground/80 text-xl leading-relaxed"
+                    style={{
+                      background: useTransform(
+                        certificationsLine3Progress,
+                        [0, 1],
+                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                      )
+                    }}
+                  >
+                    Issued: May 6, 2025
+                  </motion.p>
+                </motion.div>
+              </motion.div>
 
               <div className="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-primary/30" />
               <div className="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-primary/30" />
