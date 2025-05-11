@@ -191,3 +191,9 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+html, body {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
+}

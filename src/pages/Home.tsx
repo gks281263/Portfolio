@@ -499,25 +499,25 @@ const Home: React.FC = () => {
       <section 
         id="about" 
         ref={aboutRef} 
-        className="section min-h-[80vh] flex items-center justify-center py-6 bg-background/50 backdrop-blur-sm"
+        className="section min-h-[80vh] flex flex-col md:flex-row items-center justify-center py-6 md:py-12 bg-background/50 backdrop-blur-sm"
       >
-        <div className="container max-w-6xl">
+        <div className="container max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div
             style={{ scale: aboutScale }}
             className="max-w-5xl mx-auto"
           >
-            <div className="backdrop-blur-sm bg-background/30 rounded-lg p-12 border border-border/50 relative overflow-hidden">
+            <div className="backdrop-blur-sm bg-background/30 rounded-lg p-6 sm:p-8 md:p-12 border border-border/50 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.15),transparent_50%)]" />
               
-              <div className="flex flex-col md:flex-row gap-8 items-center">
+              <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center">
                 {/* Profile Picture */}
                 <motion.div
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5 }}
-                  className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-primary/20 shadow-lg"
+                  className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-primary/20 shadow-lg"
                 >
                   <img
                     src="https://media.licdn.com/dms/image/v2/D4D03AQEiQYtYRyscxA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1722104835765?e=1752105600&v=beta&t=35nSckmzZeJhb7L3FRh3nyGUlYq6DWd2qP1R3UIx0DM"
@@ -526,7 +526,7 @@ const Home: React.FC = () => {
                   />
                 </motion.div>
 
-                <div className="flex-1">
+                <div className="flex-1 w-full">
               <motion.h2 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -621,9 +621,9 @@ const Home: React.FC = () => {
       <section 
         id="education" 
         ref={educationRef}
-        className="section min-h-[80vh] flex items-center justify-center py-6 bg-background/50 backdrop-blur-sm"
+        className="section min-h-[80vh] flex items-center justify-center py-6 md:py-12 bg-background/50 backdrop-blur-sm"
       >
-        <div className="container max-w-6xl">
+        <div className="container max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div
             style={{ scale: educationScale }}
             className="max-w-5xl mx-auto"
@@ -724,9 +724,9 @@ const Home: React.FC = () => {
       <section 
         id="experience" 
         ref={experienceRef}
-        className="section min-h-[80vh] flex items-center justify-center py-6 bg-background/50 backdrop-blur-sm"
+        className="section min-h-[80vh] flex items-center justify-center py-6 md:py-12 bg-background/50 backdrop-blur-sm"
       >
-        <div className="container max-w-6xl">
+        <div className="container max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div
             style={{ scale: experienceScale }}
             className="max-w-5xl mx-auto"
@@ -862,9 +862,9 @@ const Home: React.FC = () => {
       <section 
         id="certifications" 
         ref={certificationsRef}
-        className="section min-h-[80vh] flex items-center justify-center py-6 bg-background/50 backdrop-blur-sm"
+        className="section min-h-[80vh] flex items-center justify-center py-6 md:py-12 bg-background/50 backdrop-blur-sm"
       >
-        <div className="container max-w-6xl">
+        <div className="container max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div
             style={{ scale: certificationsScale }}
             className="max-w-5xl mx-auto"
@@ -972,26 +972,23 @@ const Home: React.FC = () => {
       <section 
         id="skills" 
         ref={skillsRef} 
-        className="section py-20 relative bg-background/50 backdrop-blur-sm overflow-hidden"
+        className="section py-12 md:py-20 relative bg-background/50 backdrop-blur-sm overflow-hidden"
       >
-        {/* Background grid effect */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-        
-        <div className="container relative">
+        <div className="container relative px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-16"
+            className="text-center mb-8 md:mb-16"
           >
-            <h2 className="text-4xl font-bold text-foreground mb-4">Skills & Expertise</h2>
-            <p className="text-foreground/60 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2 md:mb-4">Skills & Expertise</h2>
+            <p className="text-foreground/60 max-w-2xl mx-auto text-base md:text-lg">
               A curated portfolio of technologies and tools I leverage to deliver secure, scalable, and innovative solutions in cybersecurity and software development.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 gap-16">
+          <div className="grid grid-cols-1 gap-8 md:gap-16">
             {Object.entries(groupedSkills).map(([category, skills], groupIndex) => (
               <motion.div
                 key={category}
@@ -1003,9 +1000,9 @@ const Home: React.FC = () => {
                 className="relative"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent rounded-lg" />
-                <div className="relative p-8">
-                  <h3 className="text-2xl font-semibold mb-8 text-foreground">{category}</h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                <div className="relative p-4 sm:p-8">
+                  <h3 className="text-xl md:text-2xl font-semibold mb-4 md:mb-8 text-foreground">{category}</h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-8">
                     {skills.map((skill, index) => (
                       <motion.div
                         key={skill.name}
@@ -1018,7 +1015,7 @@ const Home: React.FC = () => {
                         className="flex flex-col items-center group"
                       >
                         <div 
-                          className="w-16 h-16 rounded-xl p-3 mb-3 transition-all duration-300"
+                          className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl p-2 sm:p-3 mb-2 sm:mb-3 transition-all duration-300"
                           style={{
                             backgroundColor: `${skill.color}15`,
                             boxShadow: `0 0 20px ${skill.color}30`
@@ -1030,7 +1027,7 @@ const Home: React.FC = () => {
                             className="w-full h-full object-contain filter dark:invert"
                           />
                         </div>
-                        <span className="text-sm text-foreground/80 group-hover:text-foreground transition-colors">
+                        <span className="text-xs sm:text-sm text-foreground/80 group-hover:text-foreground transition-colors text-center">
                           {skill.name}
                         </span>
                       </motion.div>
@@ -1047,26 +1044,23 @@ const Home: React.FC = () => {
       <section 
         id="projects" 
         ref={projectsRef} 
-        className="section py-20 bg-background/50 backdrop-blur-sm relative overflow-hidden"
+        className="section py-12 md:py-20 bg-background/50 backdrop-blur-sm relative overflow-hidden"
       >
-        {/* Background effect */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.1),transparent_50%)]" />
-        
-        <div className="container relative">
+        <div className="container relative px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-16"
+            className="text-center mb-8 md:mb-16"
           >
-            <h2 className="text-4xl font-bold text-foreground mb-4">Featured Projects</h2>
-            <p className="text-foreground/60 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2 md:mb-4">Featured Projects</h2>
+            <p className="text-foreground/60 max-w-2xl mx-auto text-base md:text-lg">
               Explore a selection of my recent work, demonstrating advanced problem-solving, secure architecture, and real-world impact in cybersecurity and web development.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {projects.map((project, index) => (
               <motion.div
                 key={project.title}
@@ -1089,16 +1083,16 @@ const Home: React.FC = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">
+                  <div className="p-4 md:p-6">
+                    <h3 className="text-lg md:text-xl font-semibold mb-1 md:mb-2 text-foreground group-hover:text-primary transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-foreground/80 mb-4 line-clamp-2">{project.description}</p>
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    <p className="text-foreground/80 mb-2 md:mb-4 line-clamp-2 text-sm md:text-base">{project.description}</p>
+                    <div className="flex flex-wrap gap-1 md:gap-2 mb-2 md:mb-4">
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm"
+                          className="px-2 md:px-3 py-0.5 md:py-1 bg-primary/10 text-primary rounded-full text-xs md:text-sm"
                         >
                           {tech}
                         </span>
@@ -1109,7 +1103,7 @@ const Home: React.FC = () => {
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-primary hover:underline inline-flex items-center"
+                        className="text-primary hover:underline inline-flex items-center text-sm md:text-base"
                         whileHover={{ x: 5 }}
                         transition={{ duration: 0.2 }}
                       >
@@ -1141,26 +1135,23 @@ const Home: React.FC = () => {
       <section 
         id="contact" 
         ref={contactRef} 
-        className="section py-20 bg-background/50 backdrop-blur-sm relative overflow-hidden"
+        className="section py-12 md:py-20 bg-background/50 backdrop-blur-sm relative overflow-hidden"
       >
-        {/* Background effect */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.1),transparent_50%)]" />
-        
-        <div className="container relative">
+        <div className="container relative px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-16"
+            className="text-center mb-8 md:mb-16"
           >
-            <h2 className="text-4xl font-bold text-foreground mb-4">Get in Touch</h2>
-            <p className="text-foreground/60 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2 md:mb-4">Get in Touch</h2>
+            <p className="text-foreground/60 max-w-2xl mx-auto text-base md:text-lg">
               Ready to collaborate or discuss how I can contribute to your next project? Let's connect and create secure, innovative solutions together.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-4xl mx-auto">
             {/* Email */}
             <motion.div
               custom={0}
