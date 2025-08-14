@@ -13,6 +13,7 @@ A modern, responsive portfolio website showcasing my skills, projects, and exper
 - 🌐 **SEO Optimized** - Meta tags, Open Graph, Twitter Cards, and structured data
 - 🎨 **Micro-interactions** - Floating cards, gradient text, pulse effects, and magnetic buttons
 - 📝 **Comprehensive Sections** - About, Education, Experience, Skills, Projects, and Contact
+- 🐍 **Python Automation** - CV generator script with PDF generation capabilities
 - 🚀 **Modern Development** - Vite, TypeScript, ESLint, and modern React patterns
 
 ## 🛠️ Tech Stack
@@ -66,6 +67,9 @@ Portfolio/
 │   ├── tsconfig.node.json          # Node-specific TS config
 │   ├── eslint.config.js            # ESLint configuration
 │   └── index.html                  # Main HTML entry point
+│
+├── 🐍 Python Scripts
+│   └── cv.py                       # Automated CV/Resume PDF generator
 │
 ├── 📁 Source Code (src/)
 │   ├── 🚀 Entry Points
@@ -190,6 +194,12 @@ Portfolio/
 - Modify service worker in `public/sw.js`
 - Update icons and splash screens
 
+### **Python Scripts**
+- Customize CV content in `cv.py`
+- Modify styling and formatting in the script
+- Add new sections or modify existing ones
+- Install required Python dependencies: `pip install reportlab`
+
 ## 🔧 Development
 
 ### **Available Scripts**
@@ -198,6 +208,10 @@ Portfolio/
 - `npm run preview` - Preview production build
 - `npm run lint` - Run ESLint
 - `npm run deploy` - Deploy to GitHub Pages
+
+### **Python Scripts**
+- `python cv.py` - Generate professional CV PDF
+- Install dependencies: `pip install reportlab`
 
 ### **Code Quality**
 - **ESLint** - Code linting and style enforcement
@@ -227,6 +241,12 @@ Portfolio/
 - **ThreeGlobe.tsx** - Interactive 3D globe
 - **BabylonScene.tsx** - Advanced 3D scenes
 - **GlobeSection.tsx** - Globe section wrapper
+
+### **Python Automation**
+- **cv.py** - Automated CV/Resume PDF generator using ReportLab
+  - ATS-friendly formatting with hidden keywords
+  - Professional styling and consistent layout
+  - Automated content generation from structured data
 
 ## 📱 PWA Features
 
