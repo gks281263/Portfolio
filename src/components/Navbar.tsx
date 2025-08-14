@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from './ThemeProvider';
 
@@ -7,8 +7,6 @@ const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('#about');
-  const location = useLocation();
-  const { theme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -89,12 +87,19 @@ const Navbar: React.FC = () => {
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-            <Link 
-              to="/" 
-                className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent"
-            >
-              GK
-            </Link>
+              <Link 
+                to="/" 
+                className="flex items-center space-x-2"
+              >
+                <img 
+                  src="./GK.jpeg" 
+                  alt="GK" 
+                  className="w-8 h-8 rounded-full"
+                />
+                <span className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                  Gaurav Kumar
+                </span>
+              </Link>
             </motion.div>
 
             <div className="hidden md:flex items-center space-x-1">
@@ -179,10 +184,17 @@ const Navbar: React.FC = () => {
               <div className="flex items-center justify-between p-6 border-b border-border/10">
                 <Link
                   to="/"
-                  className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent"
+                  className="flex items-center space-x-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  GK
+                  <img 
+                    src="./GK.jpeg" 
+                    alt="GK" 
+                    className="w-8 h-8 rounded-full"
+                  />
+                  <span className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                    Gaurav Kumar
+                  </span>
                 </Link>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}

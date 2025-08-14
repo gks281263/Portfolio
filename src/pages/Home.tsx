@@ -1,7 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring, useAnimation } from 'framer-motion';
-import Typewriter from 'typewriter-effect';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import HeroSection from '../components/HeroSection';
+import { 
+  MagneticButton, 
+  FloatingCard, 
+  TextReveal, 
+  GradientText, 
+  PulseGlow, 
+  ScrollTrigger 
+} from '../components/MicroInteractions';
+import { usePerformanceOptimization } from '../hooks/usePerformanceOptimization';
 
 interface Project {
   title: string;
@@ -163,41 +171,47 @@ const projects: Project[] = [
     title: 'Telegram Keylogger (Rust)',
     description: 'Developed a keylogger for ethical research purposes using Rust, sending secure logs to Telegram via Bot API.',
     technologies: ['Rust', 'Telegram Bot API'],
-    image: '/projects/keylogger.jpg',
+    image: './assets/projects/keylogger.jpg',
     link: 'https://github.com/yourusername/telegram-keylogger'
   },
   {
     title: 'E-Commerce Platform (Django)',
     description: 'Built a secure e-commerce web app with user authentication, product management, and an admin panel.',
     technologies: ['Django', 'Python', 'PostgreSQL', 'Bootstrap'],
-    image: '/projects/ecommerce.jpg',
+    image: './assets/projects/ecommerce.jpg',
     link: 'https://github.com/yourusername/ecommerce-platform'
   },
   {
     title: 'Peer-to-Peer Lending Platform (React + Django)',
     description: 'Developed a platform where users can securely lend and rent various items, with dynamic user interfaces and backend integration.',
     technologies: ['React', 'Django', 'REST API', 'PostgreSQL'],
-    image: '/projects/p2p-lending.jpg',
+    image: './assets/projects/p2p-lending.jpg',
     link: 'https://github.com/yourusername/p2p-lending'
   },
   {
     title: 'Anonymous Chat Website (Node.js + WebSocket)',
     description: 'Real-time anonymous chat tool, similar to Omegle, built using Node.js and WebSocket.',
     technologies: ['Node.js', 'WebSocket', 'Express', 'MongoDB'],
-    image: '/projects/chat.jpg',
+    image: './assets/projects/chat.jpg',
     link: 'https://github.com/yourusername/anonymous-chat'
   }
 ];
 
 const Home: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
   const [isAboutSectionLocked, setIsAboutSectionLocked] = useState(false);
+
+  // Performance optimization for 120fps
+  const {
+    fps,
+    isHighRefreshRate,
+    getOptimizedDuration,
+    getOptimizedSpring,
+    getOptimizedEasing
+  } = usePerformanceOptimization({
+    targetFPS: 120,
+    adaptiveAnimations: true
+  });
 
   const aboutRef = useRef<HTMLDivElement>(null);
   const educationRef = useRef<HTMLDivElement>(null);
@@ -207,101 +221,119 @@ const Home: React.FC = () => {
   const projectsRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
 
+  // Responsive scroll system - adapts to screen size
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  // Fallback for mobile - ensure content is always visible
+  useEffect(() => {
+    if (isMobile) {
+      // Force all text to be visible on mobile after a short delay
+      const timer = setTimeout(() => {
+        const textElements = document.querySelectorAll('.text-foreground\\/80');
+        textElements.forEach(el => {
+          (el as HTMLElement).style.opacity = '1';
+        });
+      }, 500);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isMobile]);
+
+  // Responsive scroll offsets - earlier triggers on mobile
+  const mobileOffset: ["start end", "center center"] = ["start end", "center center"];
+  const desktopOffset: ["start end", "end start"] = ["start end", "end start"];
+
   // Scroll progress for About section
   const { scrollYProgress: aboutScrollProgress } = useScroll({
     target: aboutRef,
-    offset: ["start end", "end start"]
+    offset: isMobile ? mobileOffset : desktopOffset
   });
 
   // Scroll progress for Education section
   const { scrollYProgress: educationScrollProgress } = useScroll({
     target: educationRef,
-    offset: ["start end", "end start"]
+    offset: isMobile ? mobileOffset : desktopOffset
   });
 
   // Scroll progress for Experience section
   const { scrollYProgress: experienceScrollProgress } = useScroll({
     target: experienceRef,
-    offset: ["start end", "end start"]
+    offset: isMobile ? mobileOffset : desktopOffset
   });
 
   // Scroll progress for Certifications section
   const { scrollYProgress: certificationsScrollProgress } = useScroll({
     target: certificationsRef,
-    offset: ["start end", "end start"]
+    offset: isMobile ? mobileOffset : desktopOffset
   });
 
-  // Enhanced scale animation with more zoom for About section
-  const aboutScale = useSpring(useTransform(aboutScrollProgress, [0, 0.3], [0.85, 1.1]), {
-    stiffness: 100,
-    damping: 30
-  });
+  // Responsive scale animations - more subtle on mobile
+  const aboutScale = useSpring(
+    useTransform(aboutScrollProgress, [0, isMobile ? 0.5 : 0.3], [0.9, 1.05]), 
+    { stiffness: 80, damping: 25 }
+  );
 
-  // Enhanced scale animation with more zoom for Education section
-  const educationScale = useSpring(useTransform(educationScrollProgress, [0, 0.3], [0.85, 1.1]), {
-    stiffness: 100,
-    damping: 30
-  });
+  const educationScale = useSpring(
+    useTransform(educationScrollProgress, [0, isMobile ? 0.5 : 0.3], [0.9, 1.05]), 
+    { stiffness: 80, damping: 25 }
+  );
 
-  // Enhanced scale animation with more zoom for Experience section
-  const experienceScale = useSpring(useTransform(experienceScrollProgress, [0, 0.3], [0.85, 1.1]), {
-    stiffness: 100,
-    damping: 30
-  });
+  const experienceScale = useSpring(
+    useTransform(experienceScrollProgress, [0, isMobile ? 0.5 : 0.3], [0.9, 1.05]), 
+    { stiffness: 80, damping: 25 }
+  );
 
-  // Enhanced scale animation with more zoom for Certifications section
-  const certificationsScale = useSpring(useTransform(certificationsScrollProgress, [0, 0.3], [0.85, 1.1]), {
-    stiffness: 100,
-    damping: 30
-  });
+  const certificationsScale = useSpring(
+    useTransform(certificationsScrollProgress, [0, isMobile ? 0.5 : 0.3], [0.9, 1.05]), 
+    { stiffness: 80, damping: 25 }
+  );
 
-  // Line highlight progress for About section
-  const aboutLine1Progress = useTransform(aboutScrollProgress, [0.3, 0.4], [0, 1]);
-  const aboutLine2Progress = useTransform(aboutScrollProgress, [0.4, 0.5], [0, 1]);
-  const aboutLine3Progress = useTransform(aboutScrollProgress, [0.5, 0.6], [0, 1]);
+  // Responsive line progress - earlier and faster on mobile
+  const aboutLine1Progress = useTransform(aboutScrollProgress, 
+    isMobile ? [0.1, 0.3] : [0.3, 0.4], [0, 1]);
+  const aboutLine2Progress = useTransform(aboutScrollProgress, 
+    isMobile ? [0.2, 0.4] : [0.4, 0.5], [0, 1]);
+  const aboutLine3Progress = useTransform(aboutScrollProgress, 
+    isMobile ? [0.3, 0.5] : [0.5, 0.6], [0, 1]);
 
-  // Line highlight progress for Education section
-  const educationLine1Progress = useTransform(educationScrollProgress, [0.3, 0.4], [0, 1]);
-  const educationLine2Progress = useTransform(educationScrollProgress, [0.4, 0.5], [0, 1]);
-  const educationLine3Progress = useTransform(educationScrollProgress, [0.5, 0.6], [0, 1]);
+  const educationLine1Progress = useTransform(educationScrollProgress, 
+    isMobile ? [0.1, 0.3] : [0.3, 0.4], [0, 1]);
+  const educationLine2Progress = useTransform(educationScrollProgress, 
+    isMobile ? [0.2, 0.4] : [0.4, 0.5], [0, 1]);
+  const educationLine3Progress = useTransform(educationScrollProgress, 
+    isMobile ? [0.3, 0.5] : [0.5, 0.6], [0, 1]);
 
-  // Line highlight progress for Experience section
-  const experienceLine1Progress = useTransform(experienceScrollProgress, [0.3, 0.4], [0, 1]);
-  const experienceLine2Progress = useTransform(experienceScrollProgress, [0.4, 0.5], [0, 1]);
-  const experienceLine3Progress = useTransform(experienceScrollProgress, [0.5, 0.6], [0, 1]);
+  const experienceLine1Progress = useTransform(experienceScrollProgress, 
+    isMobile ? [0.1, 0.3] : [0.3, 0.4], [0, 1]);
+  const experienceLine2Progress = useTransform(experienceScrollProgress, 
+    isMobile ? [0.2, 0.4] : [0.4, 0.5], [0, 1]);
 
-  // Line highlight progress for Certifications section
-  const certificationsLine1Progress = useTransform(certificationsScrollProgress, [0.3, 0.4], [0, 1]);
-  const certificationsLine2Progress = useTransform(certificationsScrollProgress, [0.4, 0.5], [0, 1]);
-  const certificationsLine3Progress = useTransform(certificationsScrollProgress, [0.5, 0.6], [0, 1]);
 
-  // Track overall highlight progress for About section
+  const certificationsLine1Progress = useTransform(certificationsScrollProgress, 
+    isMobile ? [0.1, 0.3] : [0.3, 0.4], [0, 1]);
+  const certificationsLine2Progress = useTransform(certificationsScrollProgress, 
+    isMobile ? [0.2, 0.4] : [0.4, 0.5], [0, 1]);
+  const certificationsLine3Progress = useTransform(certificationsScrollProgress, 
+    isMobile ? [0.3, 0.5] : [0.5, 0.6], [0, 1]);
+
+  // Responsive overall progress
   const aboutTotalHighlightProgress = useTransform(
     aboutScrollProgress,
-    [0.3, 0.6],
+    isMobile ? [0.1, 0.5] : [0.3, 0.6],
     [0, 1]
   );
 
-  // Track overall highlight progress for Education section
-  const educationTotalHighlightProgress = useTransform(
-    educationScrollProgress,
-    [0.3, 0.6],
-    [0, 1]
-  );
 
-  // Track overall highlight progress for Experience section
-  const experienceTotalHighlightProgress = useTransform(
-    experienceScrollProgress,
-    [0.3, 0.6],
-    [0, 1]
-  );
-
-  // Track overall highlight progress for Certifications section
-  const certificationsTotalHighlightProgress = useTransform(
-    certificationsScrollProgress,
-    [0.3, 0.6],
-    [0, 1]
-  );
 
   // Scroll lock effect
   useEffect(() => {
@@ -373,24 +405,7 @@ const Home: React.FC = () => {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-  };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  // Scroll progress for Skills section
-  const { scrollYProgress: skillsScrollProgress } = useScroll({
-    target: skillsRef,
-    offset: ["start end", "end start"]
-  });
 
   // Group skills by category
   const groupedSkills = skills.reduce((acc, skill) => {
@@ -400,53 +415,6 @@ const Home: React.FC = () => {
     acc[skill.category].push(skill);
     return acc;
   }, {} as Record<string, Skill[]>);
-
-  // Animation variants for skill groups
-  const groupVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.2,
-        duration: 0.5,
-        ease: "easeOut"
-      }
-    })
-  };
-
-  // Animation variants for individual skills
-  const skillVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: (i: number) => ({
-      opacity: 1,
-      scale: 1,
-      transition: {
-        delay: i * 0.1,
-        duration: 0.3,
-        ease: "easeOut"
-      }
-    }),
-    hover: {
-      scale: 1.1,
-      transition: {
-        duration: 0.2,
-        ease: "easeInOut"
-      }
-    }
-  };
-
-  // Scroll progress for Projects section
-  const { scrollYProgress: projectsScrollProgress } = useScroll({
-    target: projectsRef,
-    offset: ["start end", "end start"]
-  });
-
-  // Scroll progress for Contact section
-  const { scrollYProgress: contactScrollProgress } = useScroll({
-    target: contactRef,
-    offset: ["start end", "end start"]
-  });
 
   // Project card animation variants
   const projectCardVariants = {
@@ -549,6 +517,7 @@ const Home: React.FC = () => {
                   <motion.p 
                     className="text-foreground/80 text-xl leading-relaxed"
                     style={{
+                      opacity: isMobile ? 1 : aboutLine1Progress,
                       background: useTransform(
                         aboutLine1Progress,
                         [0, 1],
@@ -557,7 +526,7 @@ const Home: React.FC = () => {
                       )
                     }}
                   >
-                    I am a results-driven Cybersecurity Analyst and Full-Stack Developer, dedicated to building secure, high-performance digital solutions. My expertise lies in integrating robust security protocols with seamless user experiences, ensuring every application is both resilient and intuitive.
+                    Driven second-year Computer Science student specializing in <strong>Cyber Security</strong>, with hands-on experience in <strong>full-stack development</strong>, <strong>workflow automation</strong>, <strong>penetration testing</strong>, and <strong>malware analysis</strong>. My expertise lies in integrating robust security protocols with seamless user experiences, ensuring every application is both resilient and intuitive.
                   </motion.p>
                 </motion.div>
                 
@@ -572,6 +541,7 @@ const Home: React.FC = () => {
                   <motion.p 
                     className="text-foreground/80 text-xl leading-relaxed"
                     style={{
+                      opacity: isMobile ? 1 : aboutLine2Progress,
                       background: useTransform(
                         aboutLine2Progress,
                         [0, 1],
@@ -580,7 +550,7 @@ const Home: React.FC = () => {
                       )
                     }}
                   >
-                    With a deep command of modern web technologies and cybersecurity best practices, I specialize in architecting applications that are visually compelling and fortified against evolving threats. My work is defined by a commitment to excellence, innovation, and proactive risk mitigation.
+                    Co-founded a marketing startup, developing <strong>backend systems</strong>, optimizing processes, and scaling digital tools. With a deep command of modern web technologies and cybersecurity best practices, I specialize in architecting applications that are visually compelling and fortified against evolving threats.
                   </motion.p>
                 </motion.div>
 
@@ -595,6 +565,7 @@ const Home: React.FC = () => {
                   <motion.p 
                     className="text-foreground/80 text-xl leading-relaxed"
                     style={{
+                      opacity: isMobile ? 1 : aboutLine3Progress,
                       background: useTransform(
                         aboutLine3Progress,
                         [0, 1],
@@ -603,7 +574,7 @@ const Home: React.FC = () => {
                       )
                     }}
                   >
-                    I combine technical mastery with a strategic mindset, delivering projects that exceed expectations in both functionality and security. My mission is to empower organizations with solutions that are not only effective but also future-proof.
+                    Passionate about <strong>secure software design</strong>, <strong>API development</strong>, and <strong>ethical hacking</strong>. Eager to secure an internship to further enhance cybersecurity and backend expertise while delivering high-impact, scalable solutions that exceed expectations in both functionality and security.
                   </motion.p>
                 </motion.div>
               </motion.div>
@@ -745,17 +716,20 @@ const Home: React.FC = () => {
                 Experience
               </motion.h2>
               
-              <motion.div className="space-y-6">
+              <motion.div className="space-y-12">
+                {/* First Experience - Co-Founder */}
                 <motion.div
-                  className="relative"
+                  className="relative border-l-4 border-primary/30 pl-6 pb-8"
                   style={{
                     opacity: experienceLine1Progress,
                     filter: useTransform(experienceLine1Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
                     y: useTransform(experienceLine1Progress, [0, 1], [20, 0])
                   }}
                 >
-                  <motion.p 
-                    className="text-foreground/80 text-xl leading-relaxed"
+                  <div className="absolute left-[-8px] top-0 w-4 h-4 bg-primary rounded-full border-2 border-background"></div>
+                  
+                  <motion.div 
+                    className="mb-4"
                     style={{
                       background: useTransform(
                         experienceLine1Progress,
@@ -765,20 +739,74 @@ const Home: React.FC = () => {
                       )
                     }}
                   >
-                    Co-Founder – Promotionia (Startup)
-                  </motion.p>
+                    <h3 className="text-2xl font-bold text-foreground mb-2">Co-Founder</h3>
+                    <p className="text-primary font-semibold text-lg mb-1">Promotionia (Startup)</p>
+                    <p className="text-foreground/70 text-base">June 2023 – March 2025</p>
+                  </motion.div>
+
+                  <motion.ul 
+                    className="text-foreground/80 text-lg leading-relaxed list-disc list-inside space-y-3"
+                    style={{
+                      background: useTransform(
+                        experienceLine1Progress,
+                        [0, 1],
+                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                      )
+                    }}
+                  >
+                    <motion.li
+                      style={{
+                        opacity: useTransform(experienceLine1Progress, [0.3, 0.4], [0, 1]),
+                        filter: useTransform(experienceLine1Progress, [0.3, 0.4], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine1Progress, [0.3, 0.4], [20, 0])
+                      }}
+                    >
+                      Engineered and launched two full-stack marketing platforms with advanced order processing and SEO optimization, driving measurable business growth.
+                    </motion.li>
+                    <motion.li
+                      style={{
+                        opacity: useTransform(experienceLine1Progress, [0.4, 0.5], [0, 1]),
+                        filter: useTransform(experienceLine1Progress, [0.4, 0.5], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine1Progress, [0.4, 0.5], [20, 0])
+                      }}
+                    >
+                      Automated Instagram account management and internal workflows using Python and Google Sheets, reducing manual workload by 90% and boosting operational efficiency.
+                    </motion.li>
+                    <motion.li
+                      style={{
+                        opacity: useTransform(experienceLine1Progress, [0.5, 0.6], [0, 1]),
+                        filter: useTransform(experienceLine1Progress, [0.5, 0.6], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine1Progress, [0.5, 0.6], [20, 0])
+                      }}
+                    >
+                      Led and mentored a 15-member marketing team, fostering a culture of innovation and achieving a 30% improvement in team productivity.
+                    </motion.li>
+                    <motion.li
+                      style={{
+                        opacity: useTransform(experienceLine1Progress, [0.6, 0.7], [0, 1]),
+                        filter: useTransform(experienceLine1Progress, [0.6, 0.7], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine1Progress, [0.6, 0.7], [20, 0])
+                      }}
+                    >
+                      Strengthened brand identity and digital presence across multiple platforms, resulting in increased engagement and market reach.
+                    </motion.li>
+                  </motion.ul>
                 </motion.div>
-                
+
+                {/* Second Experience - Backend Developer Intern */}
                 <motion.div
-                  className="relative"
+                  className="relative border-l-4 border-primary/30 pl-6"
                   style={{
                     opacity: experienceLine2Progress,
                     filter: useTransform(experienceLine2Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
                     y: useTransform(experienceLine2Progress, [0, 1], [20, 0])
                   }}
                 >
-                  <motion.p 
-                    className="text-foreground/80 text-xl leading-relaxed"
+                  <div className="absolute left-[-8px] top-0 w-4 h-4 bg-primary rounded-full border-2 border-background"></div>
+                  
+                  <motion.div 
+                    className="mb-4"
                     style={{
                       background: useTransform(
                         experienceLine2Progress,
@@ -788,23 +816,16 @@ const Home: React.FC = () => {
                       )
                     }}
                   >
-                    June 2023 – March 2025
-                  </motion.p>
-                </motion.div>
+                    <h3 className="text-2xl font-bold text-foreground mb-2">Backend Developer Intern</h3>
+                    <p className="text-primary font-semibold text-lg mb-1">AiiQA Powered by Code2Tech Innovation Pvt. Ltd</p>
+                    <p className="text-foreground/70 text-base">May 2025 - Aug 2025</p>
+                  </motion.div>
 
-                <motion.div
-                  className="relative"
-                  style={{
-                    opacity: experienceLine3Progress,
-                    filter: useTransform(experienceLine3Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
-                    y: useTransform(experienceLine3Progress, [0, 1], [20, 0])
-                  }}
-                >
                   <motion.ul 
-                    className="text-foreground/80 text-xl leading-relaxed list-disc list-inside space-y-2"
+                    className="text-foreground/80 text-lg leading-relaxed list-disc list-inside space-y-3"
                     style={{
                       background: useTransform(
-                        experienceLine3Progress,
+                        experienceLine2Progress,
                         [0, 1],
                         ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
                          'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
@@ -813,39 +834,39 @@ const Home: React.FC = () => {
                   >
                     <motion.li
                       style={{
-                        opacity: useTransform(experienceLine3Progress, [0.3, 0.4], [0, 1]),
-                        filter: useTransform(experienceLine3Progress, [0.3, 0.4], ['blur(5px)', 'blur(0px)']),
-                        y: useTransform(experienceLine3Progress, [0.3, 0.4], [20, 0])
+                        opacity: useTransform(experienceLine2Progress, [0.3, 0.4], [0, 1]),
+                        filter: useTransform(experienceLine2Progress, [0.3, 0.4], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine2Progress, [0.3, 0.4], [20, 0])
                       }}
                     >
-                      Engineered and launched two full-stack marketing platforms with advanced order processing and SEO optimization, driving measurable business growth.
+                      <strong>Developed robust backend services and RESTful APIs</strong> using Django Rest Framework (DRF), implementing comprehensive data models, serializers, and view sets for scalable web applications.
                     </motion.li>
                     <motion.li
                       style={{
-                        opacity: useTransform(experienceLine3Progress, [0.4, 0.5], [0, 1]),
-                        filter: useTransform(experienceLine3Progress, [0.4, 0.5], ['blur(5px)', 'blur(0px)']),
-                        y: useTransform(experienceLine3Progress, [0.4, 0.5], [20, 0])
+                        opacity: useTransform(experienceLine2Progress, [0.4, 0.5], [0, 1]),
+                        filter: useTransform(experienceLine2Progress, [0.4, 0.5], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine2Progress, [0.4, 0.5], [20, 0])
                       }}
                     >
-                      Automated Instagram account management and internal workflows using Python and Google Sheets, reducing manual workload by 90% and boosting operational efficiency.
+                      <strong>Dockerized the complete project infrastructure</strong> for consistent deployment across different environments, creating optimized Docker containers and docker-compose configurations for seamless CI/CD integration.
                     </motion.li>
                     <motion.li
                       style={{
-                        opacity: useTransform(experienceLine3Progress, [0.5, 0.6], [0, 1]),
-                        filter: useTransform(experienceLine3Progress, [0.5, 0.6], ['blur(5px)', 'blur(0px)']),
-                        y: useTransform(experienceLine3Progress, [0.5, 0.6], [20, 0])
+                        opacity: useTransform(experienceLine2Progress, [0.5, 0.6], [0, 1]),
+                        filter: useTransform(experienceLine2Progress, [0.5, 0.6], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine2Progress, [0.5, 0.6], [20, 0])
                       }}
                     >
-                      Led and mentored a 15-member marketing team, fostering a culture of innovation and achieving a 30% improvement in team productivity.
+                      <strong>Designed and implemented secure software architecture</strong> with authentication, authorization, and data validation while optimizing code performance through database query optimization and caching strategies.
                     </motion.li>
                     <motion.li
                       style={{
-                        opacity: useTransform(experienceLine3Progress, [0.6, 0.7], [0, 1]),
-                        filter: useTransform(experienceLine3Progress, [0.6, 0.7], ['blur(5px)', 'blur(0px)']),
-                        y: useTransform(experienceLine3Progress, [0.6, 0.7], [20, 0])
+                        opacity: useTransform(experienceLine2Progress, [0.6, 0.7], [0, 1]),
+                        filter: useTransform(experienceLine2Progress, [0.6, 0.7], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine2Progress, [0.6, 0.7], [20, 0])
                       }}
                     >
-                      Strengthened brand identity and digital presence across multiple platforms, resulting in increased engagement and market reach.
+                      <strong>Collaborated on comprehensive API documentation</strong> and system integration for scalable applications, ensuring seamless communication between frontend and backend systems with proper error handling and logging.
                     </motion.li>
                   </motion.ul>
                 </motion.div>
@@ -974,29 +995,34 @@ const Home: React.FC = () => {
         ref={skillsRef} 
         className="section py-12 md:py-20 relative bg-background/50 backdrop-blur-sm overflow-hidden"
       >
+        {/* White Net Pattern with Gradient Fade */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[linear-gradient(0deg,transparent_24%,rgba(255,255,255,0.08)_25%,rgba(255,255,255,0.08)_26%,transparent_27%,transparent_74%,rgba(255,255,255,0.08)_75%,rgba(255,255,255,0.08)_76%,transparent_77%,transparent),linear-gradient(90deg,transparent_24%,rgba(255,255,255,0.08)_25%,rgba(255,255,255,0.08)_26%,transparent_27%,transparent_74%,rgba(255,255,255,0.08)_75%,rgba(255,255,255,0.08)_76%,transparent_77%,transparent)] bg-[length:100px_100px] opacity-30" />
+          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background/50 to-transparent" />
+        </div>
         <div className="container relative px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+          <ScrollTrigger
+            animation="fade-in"
             className="text-center mb-8 md:mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2 md:mb-4">Skills & Expertise</h2>
-            <p className="text-foreground/60 max-w-2xl mx-auto text-base md:text-lg">
-              A curated portfolio of technologies and tools I leverage to deliver secure, scalable, and innovative solutions in cybersecurity and software development.
-            </p>
-          </motion.div>
+            <TextReveal className="mb-2 md:mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold">
+                <GradientText>Skills & Expertise</GradientText>
+              </h2>
+            </TextReveal>
+            <TextReveal delay={200}>
+              <p className="text-foreground/60 max-w-2xl mx-auto text-base md:text-lg">
+                A curated portfolio of technologies and tools I leverage to deliver secure, scalable, and innovative solutions in cybersecurity and software development.
+              </p>
+            </TextReveal>
+          </ScrollTrigger>
 
           <div className="grid grid-cols-1 gap-8 md:gap-16">
             {Object.entries(groupedSkills).map(([category, skills], groupIndex) => (
-              <motion.div
+              <ScrollTrigger
                 key={category}
-                custom={groupIndex}
-                variants={groupVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                animation="fade-in"
+                delay={groupIndex * 200}
                 className="relative"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent rounded-lg" />
@@ -1004,37 +1030,39 @@ const Home: React.FC = () => {
                   <h3 className="text-xl md:text-2xl font-semibold mb-4 md:mb-8 text-foreground">{category}</h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-8">
                     {skills.map((skill, index) => (
-                      <motion.div
+                      <FloatingCard
                         key={skill.name}
-                        custom={index}
-                        variants={skillVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        whileHover="hover"
-                        viewport={{ once: true }}
+                        intensity={0.5}
                         className="flex flex-col items-center group"
                       >
-                        <div 
-                          className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl p-2 sm:p-3 mb-2 sm:mb-3 transition-all duration-300"
-                          style={{
-                            backgroundColor: `${skill.color}15`,
-                            boxShadow: `0 0 20px ${skill.color}30`
-                          }}
+                        <ScrollTrigger
+                          animation="scale-in"
+                          delay={index * 50}
+                          className="flex flex-col items-center"
                         >
-                          <img
-                            src={skill.logo}
-                            alt={skill.name}
-                            className="w-full h-full object-contain filter dark:invert"
-                          />
-                        </div>
-                        <span className="text-xs sm:text-sm text-foreground/80 group-hover:text-foreground transition-colors text-center">
-                          {skill.name}
-                        </span>
-                      </motion.div>
+                          <PulseGlow
+                            color={`${skill.color}40`}
+                            className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl p-2 sm:p-3 mb-2 sm:mb-3 transition-all duration-300"
+                            style={{
+                              backgroundColor: `${skill.color}15`,
+                              boxShadow: `0 0 20px ${skill.color}30`
+                            }}
+                          >
+                            <img
+                              src={skill.logo}
+                              alt={skill.name}
+                              className="w-full h-full object-contain filter dark:invert"
+                            />
+                          </PulseGlow>
+                          <span className="text-xs sm:text-sm text-foreground/80 group-hover:text-foreground transition-colors text-center">
+                            {skill.name}
+                          </span>
+                        </ScrollTrigger>
+                      </FloatingCard>
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </ScrollTrigger>
             ))}
           </div>
         </div>
@@ -1056,11 +1084,11 @@ const Home: React.FC = () => {
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2 md:mb-4">Featured Projects</h2>
             <p className="text-foreground/60 max-w-2xl mx-auto text-base md:text-lg">
-              Explore a selection of my recent work, demonstrating advanced problem-solving, secure architecture, and real-world impact in cybersecurity and web development.
+              A showcase of my recent work, demonstrating expertise in secure web development and automation solutions.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 relative">
             {projects.map((project, index) => (
               <motion.div
                 key={project.title}
@@ -1318,6 +1346,44 @@ const Home: React.FC = () => {
           </motion.div>
         </motion.div>
       )}
+
+      {/* Performance Indicator (Development Only) */}
+      {import.meta.env.DEV && (
+        <div className="fixed top-4 right-4 z-50 bg-background/80 backdrop-blur-sm rounded-lg p-3 border border-primary/30">
+          <div className="text-xs text-foreground/80">
+            <div>FPS: <span className="text-primary font-mono">{fps}</span></div>
+            <div>Refresh Rate: <span className="text-primary font-mono">{isHighRefreshRate ? 'High' : 'Standard'}</span></div>
+          </div>
+        </div>
+      )}
+
+      {/* Back to Top Button */}
+      <ScrollTrigger
+        animation="fade-in"
+        className="fixed bottom-8 right-8 z-40"
+        threshold={0.1}
+      >
+        <MagneticButton
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="w-12 h-12 bg-primary/20 backdrop-blur-sm rounded-full border border-primary/30 hover:bg-primary/30 transition-all duration-300 group"
+        >
+          <PulseGlow className="w-full h-full flex items-center justify-center">
+            <svg
+              className="w-6 h-6 text-primary group-hover:scale-110 transition-transform duration-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 10l7-7m0 0l7 7m-7-7v18"
+              />
+            </svg>
+          </PulseGlow>
+        </MagneticButton>
+      </ScrollTrigger>
     </div>
   );
 };

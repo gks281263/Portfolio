@@ -196,4 +196,236 @@ html, body {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: none;
+  /* 120fps optimizations */
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  image-rendering: optimizeSpeed;
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 80px; /* Account for fixed navbar */
+  }
+  
+  /* Ensure text is always readable on mobile */
+  .text-foreground\/80 {
+    opacity: 1 !important;
+  }
+  
+  /* Reduce animation intensity on mobile for better performance */
+  * {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.3s !important;
+  }
+  
+  /* Improve touch scrolling */
+  .section {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: y proximity;
+  }
+}
+
+/* 120fps Performance Optimizations */
+@layer utilities {
+  /* Hardware acceleration for animations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+  
+  /* Optimized animation timing for 120fps */
+  .animate-120fps {
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Smooth scroll behavior */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Reduced motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-120fps {
+      animation-duration: 0.1s;
+    }
+    
+    .gpu-accelerated {
+      transform: none;
+      will-change: auto;
+    }
+  }
+}
+
+/* Micro-interactions and enhanced animations */
+@layer components {
+  /* Button hover effects - 120fps optimized */
+  .btn-micro {
+    @apply relative overflow-hidden gpu-accelerated;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .btn-micro::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 opacity-0 gpu-accelerated;
+    transform: translate3d(-100%, 0, 0);
+    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .btn-micro:hover::before {
+    @apply opacity-100;
+    transform: translate3d(0, 0, 0);
+  }
+  
+  .btn-micro:active {
+    transform: translate3d(0, 0, 0) scale(0.95);
+  }
+  
+  /* Card hover effects - 120fps optimized */
+  .card-micro {
+    @apply gpu-accelerated hover:shadow-2xl hover:shadow-primary/20;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .card-micro:hover {
+    transform: translate3d(0, -8px, 0) scale(1.02);
+  }
+  
+  /* Text reveal animations - 120fps optimized */
+  .text-reveal {
+    @apply relative overflow-hidden gpu-accelerated;
+  }
+  
+  .text-reveal::after {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-primary/30 to-transparent gpu-accelerated;
+    transform: translate3d(-100%, 0, 0);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .text-reveal:hover::after {
+    transform: translate3d(100%, 0, 0);
+  }
+  
+  /* Floating animation - 120fps optimized */
+  .float {
+    animation: float 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    will-change: transform;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(0, -20px, 0); }
+  }
+  
+  /* Pulse animation - 120fps optimized */
+  .pulse-glow {
+    animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    will-change: box-shadow;
+  }
+  
+  @keyframes pulse-glow {
+    from { box-shadow: 0 0 20px rgba(0, 255, 255, 0.4); }
+    to { box-shadow: 0 0 30px rgba(0, 255, 255, 0.8); }
+  }
+  
+  /* Gradient text animation - 120fps optimized */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
+    background-size: 200% 200%;
+    animation: gradient-shift 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    will-change: background-position;
+  }
+  
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  /* Scroll-triggered animations - 120fps optimized */
+  .scroll-fade-in {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
+  }
+  
+  .scroll-fade-in.visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  
+  .scroll-slide-left {
+    opacity: 0;
+    transform: translate3d(-50px, 0, 0);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
+  }
+  
+  .scroll-slide-left.visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  
+  .scroll-slide-right {
+    opacity: 0;
+    transform: translate3d(50px, 0, 0);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
+  }
+  
+  .scroll-slide-right.visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  
+  .scroll-scale-in {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.8);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
+  }
+  
+  .scroll-scale-in.visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  
+  /* Parallax effect - 120fps optimized */
+  .parallax {
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  
+  /* Magnetic effect for buttons - 120fps optimized */
+  .magnetic {
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+  
+  .magnetic:hover {
+    transform: translate3d(0, 0, 0) scale(1.05);
+  }
+  
+  /* Ripple effect - 120fps optimized */
+  .ripple {
+    @apply relative overflow-hidden gpu-accelerated;
+  }
+  
+  .ripple::before {
+    content: '';
+    @apply absolute inset-0 bg-white/20 rounded-full gpu-accelerated;
+    transform: translate3d(0, 0, 0) scale(0);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .ripple:active::before {
+    transform: translate3d(0, 0, 0) scale(4);
+  }
 }

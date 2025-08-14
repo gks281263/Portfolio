@@ -39,11 +39,8 @@ const BabylonScene: React.FC<BabylonSceneProps> = ({ type, className, scrollProg
   const isMobileQuery = useMediaQuery({ maxWidth: 768 });
   const sceneRef = useRef<Scene | null>(null);
   const cameraRef = useRef<ArcRotateCamera | null>(null);
-  const isZoomedInRef = useRef(false);
-  const isAnimatingRef = useRef(false);
   const globeRef = useRef<Mesh | null>(null);
   const skillIconsRef = useRef<Mesh[]>([]);
-  const orbitAngleRef = useRef(0);
 
   const createGlobe = (scene: Scene) => {
     // Create the main globe with enhanced grid texture

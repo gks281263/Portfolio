@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import Home from './pages/Home';
 import Footer from './components/Footer';
 import MobileMenu from './components/MobileMenu';
