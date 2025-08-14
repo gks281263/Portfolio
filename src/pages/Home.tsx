@@ -9,7 +9,7 @@ import {
   PulseGlow, 
   ScrollTrigger 
 } from '../components/MicroInteractions';
-import { usePerformanceOptimization } from '../hooks/usePerformanceOptimization';
+
 
 interface Project {
   title: string;
@@ -201,15 +201,7 @@ const Home: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isAboutSectionLocked, setIsAboutSectionLocked] = useState(false);
 
-  // Performance optimization for 120fps
-  const {
-    getOptimizedDuration,
-    getOptimizedSpring,
-    getOptimizedEasing
-  } = usePerformanceOptimization({
-    targetFPS: 120,
-    adaptiveAnimations: true
-  });
+
 
   const aboutRef = useRef<HTMLDivElement>(null);
   const educationRef = useRef<HTMLDivElement>(null);
@@ -486,7 +478,7 @@ const Home: React.FC = () => {
                   className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-primary/20 shadow-lg"
                 >
                   <img
-                    src="https://media.licdn.com/dms/image/v2/D4D03AQEiQYtYRyscxA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1722104835765?e=1752105600&v=beta&t=35nSckmzZeJhb7L3FRh3nyGUlYq6DWd2qP1R3UIx0DM"
+                    src="https://media.licdn.com/dms/image/v2/D4D03AQEiQYtYRyscxA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1722104835775?e=1758153600&v=beta&t=MA8DBX_fuomOXHg4DawVz_yWbskC_P_EhuNzPh8H5uY"
                     alt="Gaurav Kumar"
                     className="w-full h-full object-cover"
                   />
