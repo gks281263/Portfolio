@@ -18,12 +18,12 @@ const STATIC_ASSETS = [
   '/Portfolio/src/App.css',
   '/Portfolio/site.webmanifest',
   '/Portfolio/GK.jpeg',
-  '/Portfolio/public/earth-blue-marble.jpg',
-  '/Portfolio/public/earth-clouds.png',
-  '/Portfolio/public/earth-specular.jpg',
-  '/Portfolio/public/earth-topology.png',
-  '/Portfolio/public/GCV.pdf',
-  '/Portfolio/public/PAC.png',
+  '/Portfolio/earth-blue-marble.jpg',
+  '/Portfolio/earth-clouds.png',
+  '/Portfolio/earth-specular.jpg',
+  '/Portfolio/earth-topology.png',
+  '/Portfolio/GCV.pdf',
+  '/Portfolio/PAC.png',
   'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap',
   'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2'
 ];
