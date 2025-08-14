@@ -203,8 +203,6 @@ const Home: React.FC = () => {
 
   // Performance optimization for 120fps
   const {
-    fps,
-    isHighRefreshRate,
     getOptimizedDuration,
     getOptimizedSpring,
     getOptimizedEasing
@@ -1347,15 +1345,7 @@ const Home: React.FC = () => {
         </motion.div>
       )}
 
-      {/* Performance Indicator (Development Only) */}
-      {import.meta.env.DEV && (
-        <div className="fixed top-4 right-4 z-50 bg-background/80 backdrop-blur-sm rounded-lg p-3 border border-primary/30">
-          <div className="text-xs text-foreground/80">
-            <div>FPS: <span className="text-primary font-mono">{fps}</span></div>
-            <div>Refresh Rate: <span className="text-primary font-mono">{isHighRefreshRate ? 'High' : 'Standard'}</span></div>
-          </div>
-        </div>
-      )}
+
 
       {/* Back to Top Button */}
       <ScrollTrigger
