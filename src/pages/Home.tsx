@@ -23,17 +23,54 @@ interface Skill {
   name: string;
   logo: string;
   color: string;
-  category: 'Languages' | 'Frameworks' | 'Security' | 'DevOps' | 'Soft Skills';
+  category: 'Languages' | 'Frameworks' | 'Security' | 'DevOps' | 'Soft Skills' | 'Backend & Systems' | 'Databases';
 }
 
 const skills: Skill[] = [
-  // Languages
+  // Backend & Systems
   { 
-    name: 'C', 
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg',
-    color: '#00599C',
-    category: 'Languages'
+    name: 'REST API Design', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+    color: '#339933',
+    category: 'Backend & Systems'
   },
+  { 
+    name: 'FastAPI', 
+    logo: 'https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png',
+    color: '#009688',
+    category: 'Backend & Systems'
+  },
+  { 
+    name: 'System Architecture', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg',
+    color: '#4A90E2',
+    category: 'Backend & Systems'
+  },
+  { 
+    name: 'Modular Monoliths', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
+    color: '#4A90E2',
+    category: 'Backend & Systems'
+  },
+  { 
+    name: 'Authentication & Authorization', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jwt/jwt-original.svg',
+    color: '#4A90E2',
+    category: 'Backend & Systems'
+  },
+  { 
+    name: 'Database Design', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+    color: '#336791',
+    category: 'Backend & Systems'
+  },
+  { 
+    name: 'Query Optimization', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+    color: '#4A90E2',
+    category: 'Backend & Systems'
+  },
+  // Languages
   { 
     name: 'Python', 
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
@@ -47,12 +84,6 @@ const skills: Skill[] = [
     category: 'Languages'
   },
   { 
-    name: 'PHP', 
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg',
-    color: '#777BB4',
-    category: 'Languages'
-  },
-  { 
     name: 'JavaScript', 
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
     color: '#F7DF1E',
@@ -62,6 +93,18 @@ const skills: Skill[] = [
     name: 'TypeScript', 
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
     color: '#3178C6',
+    category: 'Languages'
+  },
+  { 
+    name: 'C', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg',
+    color: '#00599C',
+    category: 'Languages'
+  },
+  { 
+    name: 'PHP', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg',
+    color: '#777BB4',
     category: 'Languages'
   },
   { 
@@ -78,16 +121,66 @@ const skills: Skill[] = [
     category: 'Frameworks'
   },
   { 
+    name: 'Node.js', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+    color: '#339933',
+    category: 'Frameworks'
+  },
+  { 
     name: 'React', 
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
     color: '#61DAFB',
     category: 'Frameworks'
   },
+  // Databases
   { 
-    name: 'Node.js', 
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
-    color: '#339933',
-    category: 'Frameworks'
+    name: 'PostgreSQL', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+    color: '#336791',
+    category: 'Databases'
+  },
+  { 
+    name: 'SQL', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
+    color: '#4479A1',
+    category: 'Databases'
+  },
+  { 
+    name: 'SQLite', 
+    logo: 'https://sqlite.org/images/sqlite370_banner.svg',
+    color: '#003B57',
+    category: 'Databases'
+  },
+  // DevOps
+  { 
+    name: 'Docker', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
+    color: '#2496ED',
+    category: 'DevOps'
+  },
+  { 
+    name: 'Nginx', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg',
+    color: '#009639',
+    category: 'DevOps'
+  },
+  { 
+    name: 'AWS', 
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/250px-Amazon_Web_Services_Logo.svg.png',
+    color: '#FF9900',
+    category: 'DevOps'
+  },
+  { 
+    name: 'Git', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+    color: '#F05032',
+    category: 'DevOps'
+  },
+  { 
+    name: 'GitHub Actions', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
+    color: '#2088FF',
+    category: 'DevOps'
   },
   // Security Tools
   { 
@@ -126,34 +219,33 @@ const skills: Skill[] = [
     color: '#20C933',
     category: 'Security'
   },
-  // DevOps
-  { 
-    name: 'Git', 
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
-    color: '#F05032',
-    category: 'DevOps'
-  },
-  { 
-    name: 'GitHub Actions', 
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
-    color: '#2088FF',
-    category: 'DevOps'
-  },
-  { 
-    name: 'Docker', 
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
-    color: '#2496ED',
-    category: 'DevOps'
-  },
   // Soft Skills
   { 
-    name: 'Project Management', 
+    name: 'Problem Decomposition', 
     logo: 'https://cdn-icons-png.flaticon.com/512/1534/1534939.png',
     color: '#4A90E2',
     category: 'Soft Skills'
   },
   { 
+    name: 'System Thinking', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg',
+    color: '#4A90E2',
+    category: 'Soft Skills'
+  },
+  { 
+    name: 'Technical Documentation', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/markdown/markdown-original.svg',
+    color: '#4A90E2',
+    category: 'Soft Skills'
+  },
+  { 
     name: 'Team Leadership', 
+    logo: 'https://cdn-icons-png.flaticon.com/512/1534/1534939.png',
+    color: '#4A90E2',
+    category: 'Soft Skills'
+  },
+  { 
+    name: 'Ownership & Accountability', 
     logo: 'https://cdn-icons-png.flaticon.com/512/1534/1534939.png',
     color: '#4A90E2',
     category: 'Soft Skills'
@@ -304,17 +396,17 @@ const Home: React.FC = () => {
     isMobile ? [0.3, 0.5] : [0.5, 0.6], [0, 1]);
 
   const experienceLine1Progress = useTransform(experienceScrollProgress, 
-    isMobile ? [0.1, 0.3] : [0.3, 0.4], [0, 1]);
+    isMobile ? [0, 0.2] : [0, 0.25], [0, 1]);
   const experienceLine2Progress = useTransform(experienceScrollProgress, 
     isMobile ? [0.2, 0.4] : [0.4, 0.5], [0, 1]);
+  const experienceLine3Progress = useTransform(experienceScrollProgress, 
+    isMobile ? [0.3, 0.5] : [0.5, 0.6], [0, 1]);
 
 
   const certificationsLine1Progress = useTransform(certificationsScrollProgress, 
-    isMobile ? [0.1, 0.3] : [0.3, 0.4], [0, 1]);
+    isMobile ? [0, 0.2] : [0, 0.25], [0, 1]);
   const certificationsLine2Progress = useTransform(certificationsScrollProgress, 
-    isMobile ? [0.2, 0.4] : [0.4, 0.5], [0, 1]);
-  const certificationsLine3Progress = useTransform(certificationsScrollProgress, 
-    isMobile ? [0.3, 0.5] : [0.5, 0.6], [0, 1]);
+    isMobile ? [0.2, 0.4] : [0.25, 0.5], [0, 1]);
 
   // Responsive overall progress
   const aboutTotalHighlightProgress = useTransform(
@@ -478,7 +570,7 @@ const Home: React.FC = () => {
                   className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-primary/20 shadow-lg"
                 >
                   <img
-                    src="https://media.licdn.com/dms/image/v2/D4D03AQEiQYtYRyscxA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1722104835775?e=1758153600&v=beta&t=MA8DBX_fuomOXHg4DawVz_yWbskC_P_EhuNzPh8H5uY"
+                    src="/Portfolio/profile.jpg"
                     alt="Gaurav Kumar"
                     className="w-full h-full object-cover"
                   />
@@ -707,7 +799,7 @@ const Home: React.FC = () => {
               </motion.h2>
               
               <motion.div className="space-y-12">
-                {/* First Experience - Co-Founder */}
+                {/* First Experience - Loopinx Circle */}
                 <motion.div
                   className="relative border-l-4 border-primary/30 pl-6 pb-8"
                   style={{
@@ -729,9 +821,9 @@ const Home: React.FC = () => {
                       )
                     }}
                   >
-                    <h3 className="text-2xl font-bold text-foreground mb-2">Co-Founder</h3>
-                    <p className="text-primary font-semibold text-lg mb-1">Promotionia (Startup)</p>
-                    <p className="text-foreground/70 text-base">June 2023 – March 2025</p>
+                    <h3 className="text-2xl font-bold text-foreground mb-2">Backend Developer Intern</h3>
+                    <p className="text-primary font-semibold text-lg mb-1">Loopinx Circle</p>
+                    <p className="text-foreground/70 text-base">Oct 2025 – Dec 2025</p>
                   </motion.div>
 
                   <motion.ul 
@@ -747,12 +839,30 @@ const Home: React.FC = () => {
                   >
                     <motion.li
                       style={{
+                        opacity: useTransform(experienceLine1Progress, [0.1, 0.2], [0, 1]),
+                        filter: useTransform(experienceLine1Progress, [0.1, 0.2], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine1Progress, [0.1, 0.2], [20, 0])
+                      }}
+                    >
+                      Architected and built the complete backend system from scratch using Django (ORM, admin, domain logic) and FastAPI (external APIs), following a modular monolith architecture with clear domain isolation.
+                    </motion.li>
+                    <motion.li
+                      style={{
+                        opacity: useTransform(experienceLine1Progress, [0.2, 0.3], [0, 1]),
+                        filter: useTransform(experienceLine1Progress, [0.2, 0.3], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine1Progress, [0.2, 0.3], [20, 0])
+                      }}
+                    >
+                      Designed system architecture, database schema, and detailed ER diagrams; produced structured technical documentation to enable team onboarding and future scaling.
+                    </motion.li>
+                    <motion.li
+                      style={{
                         opacity: useTransform(experienceLine1Progress, [0.3, 0.4], [0, 1]),
                         filter: useTransform(experienceLine1Progress, [0.3, 0.4], ['blur(5px)', 'blur(0px)']),
                         y: useTransform(experienceLine1Progress, [0.3, 0.4], [20, 0])
                       }}
                     >
-                      Engineered and launched two full-stack marketing platforms with advanced order processing and SEO optimization, driving measurable business growth.
+                      Implemented a hybrid Django + FastAPI setup via ASGI, mounting FastAPI at /api for mobile clients while retaining Django for core business logic and admin operations.
                     </motion.li>
                     <motion.li
                       style={{
@@ -761,7 +871,7 @@ const Home: React.FC = () => {
                         y: useTransform(experienceLine1Progress, [0.4, 0.5], [20, 0])
                       }}
                     >
-                      Automated Instagram account management and internal workflows using Python and Google Sheets, reducing manual workload by 90% and boosting operational efficiency.
+                      Built a secure phone-based OTP authentication system using Twilio SMS with expiry handling, attempt limits, unified signup/login flow, and JWT-based authentication.
                     </motion.li>
                     <motion.li
                       style={{
@@ -770,7 +880,7 @@ const Home: React.FC = () => {
                         y: useTransform(experienceLine1Progress, [0.5, 0.6], [20, 0])
                       }}
                     >
-                      Led and mentored a 15-member marketing team, fostering a culture of innovation and achieving a 30% improvement in team productivity.
+                      Designed and implemented financial payout workflows using an immutable snapshot pattern to preserve transactional integrity at request time.
                     </motion.li>
                     <motion.li
                       style={{
@@ -779,14 +889,32 @@ const Home: React.FC = () => {
                         y: useTransform(experienceLine1Progress, [0.6, 0.7], [20, 0])
                       }}
                     >
-                      Strengthened brand identity and digital presence across multiple platforms, resulting in increased engagement and market reach.
+                      Developed REST APIs with validation, pagination, filtering, and query optimization using select_related and prefetch_related to eliminate N+1 query issues.
+                    </motion.li>
+                    <motion.li
+                      style={{
+                        opacity: useTransform(experienceLine1Progress, [0.7, 0.8], [0, 1]),
+                        filter: useTransform(experienceLine1Progress, [0.7, 0.8], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine1Progress, [0.7, 0.8], [20, 0])
+                      }}
+                    >
+                      Implemented role-based and object-level authorization, custom middleware for authentication, request logging, and global exception handling.
+                    </motion.li>
+                    <motion.li
+                      style={{
+                        opacity: useTransform(experienceLine1Progress, [0.8, 0.9], [0, 1]),
+                        filter: useTransform(experienceLine1Progress, [0.8, 0.9], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine1Progress, [0.8, 0.9], [20, 0])
+                      }}
+                    >
+                      Containerized the application using Docker Compose and configured production-ready deployment with Nginx and environment-based settings.
                     </motion.li>
                   </motion.ul>
                 </motion.div>
 
-                {/* Second Experience - Backend Developer Intern */}
+                {/* Second Experience - AiiQA */}
                 <motion.div
-                  className="relative border-l-4 border-primary/30 pl-6"
+                  className="relative border-l-4 border-primary/30 pl-6 pb-8"
                   style={{
                     opacity: experienceLine2Progress,
                     filter: useTransform(experienceLine2Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
@@ -860,6 +988,83 @@ const Home: React.FC = () => {
                     </motion.li>
                   </motion.ul>
                 </motion.div>
+
+                {/* Third Experience - Co-Founder */}
+                <motion.div
+                  className="relative border-l-4 border-primary/30 pl-6"
+                  style={{
+                    opacity: experienceLine3Progress,
+                    filter: useTransform(experienceLine3Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
+                    y: useTransform(experienceLine3Progress, [0, 1], [20, 0])
+                  }}
+                >
+                  <div className="absolute left-[-8px] top-0 w-4 h-4 bg-primary rounded-full border-2 border-background"></div>
+                  
+                  <motion.div 
+                    className="mb-4"
+                    style={{
+                      background: useTransform(
+                        experienceLine3Progress,
+                        [0, 1],
+                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                      )
+                    }}
+                  >
+                    <h3 className="text-2xl font-bold text-foreground mb-2">Co-Founder</h3>
+                    <p className="text-primary font-semibold text-lg mb-1">Promotionia (Startup)</p>
+                    <p className="text-foreground/70 text-base">June 2023 – March 2025</p>
+                  </motion.div>
+
+                  <motion.ul 
+                    className="text-foreground/80 text-lg leading-relaxed list-disc list-inside space-y-3"
+                    style={{
+                      background: useTransform(
+                        experienceLine3Progress,
+                        [0, 1],
+                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                      )
+                    }}
+                  >
+                    <motion.li
+                      style={{
+                        opacity: useTransform(experienceLine3Progress, [0.3, 0.4], [0, 1]),
+                        filter: useTransform(experienceLine3Progress, [0.3, 0.4], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine3Progress, [0.3, 0.4], [20, 0])
+                      }}
+                    >
+                      Engineered and launched two full-stack marketing platforms with advanced order processing and SEO optimization, driving measurable business growth.
+                    </motion.li>
+                    <motion.li
+                      style={{
+                        opacity: useTransform(experienceLine3Progress, [0.4, 0.5], [0, 1]),
+                        filter: useTransform(experienceLine3Progress, [0.4, 0.5], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine3Progress, [0.4, 0.5], [20, 0])
+                      }}
+                    >
+                      Automated Instagram account management and internal workflows using Python and Google Sheets, reducing manual workload by 90% and boosting operational efficiency.
+                    </motion.li>
+                    <motion.li
+                      style={{
+                        opacity: useTransform(experienceLine3Progress, [0.5, 0.6], [0, 1]),
+                        filter: useTransform(experienceLine3Progress, [0.5, 0.6], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine3Progress, [0.5, 0.6], [20, 0])
+                      }}
+                    >
+                      Led and mentored a 15-member marketing team, fostering a culture of innovation and achieving a 30% improvement in team productivity.
+                    </motion.li>
+                    <motion.li
+                      style={{
+                        opacity: useTransform(experienceLine3Progress, [0.6, 0.7], [0, 1]),
+                        filter: useTransform(experienceLine3Progress, [0.6, 0.7], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine3Progress, [0.6, 0.7], [20, 0])
+                      }}
+                    >
+                      Strengthened brand identity and digital presence across multiple platforms, resulting in increased engagement and market reach.
+                    </motion.li>
+                  </motion.ul>
+                </motion.div>
               </motion.div>
 
               <div className="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-primary/30" />
@@ -894,7 +1099,8 @@ const Home: React.FC = () => {
                 Certifications
               </motion.h2>
               
-              <motion.div className="space-y-6">
+              <motion.div className="space-y-8">
+                {/* JPMorgan Chase Certification */}
                 <motion.div
                   className="relative group"
                   style={{
@@ -903,72 +1109,246 @@ const Home: React.FC = () => {
                     y: useTransform(certificationsLine1Progress, [0, 1], [20, 0])
                   }}
                 >
-                  <motion.p 
-                    className="text-foreground/80 text-xl leading-relaxed flex items-center gap-3 cursor-pointer relative"
-                    style={{
-                      background: useTransform(
-                        certificationsLine1Progress,
-                        [0, 1],
-                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
-                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
-                      )
-                    }}
-                    onClick={() => window.open('/Portfolio/PAC.png', '_blank')}
-                  >
-                    Cybersecurity Foundation – Palo Alto Networks Academy
-                    <span className="relative group">
-                      <span className="ml-2 underline text-primary hover:text-primary/80 transition-colors">(View Certificate)</span>
-                      <span className="absolute left-1/2 top-full z-20 hidden group-hover:block group-focus:block w-64 p-2 bg-background border border-border rounded-lg shadow-lg mt-2 -translate-x-1/2 animate-fade-in">
-                        <img src="/Portfolio/PAC.png" alt="PAC Certificate Preview" className="w-full h-auto rounded-md object-contain" />
+                  <div className="border-l-4 border-primary/30 pl-6 pb-6">
+                    <motion.h3 
+                      className="text-2xl font-bold text-foreground mb-2"
+                      style={{
+                        background: useTransform(
+                          certificationsLine1Progress,
+                          [0, 1],
+                          ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                           'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                        )
+                      }}
+                    >
+                      JPMorganChase Software Engineering Job Simulation on Forage
+                    </motion.h3>
+                    <motion.p 
+                      className="text-foreground/70 text-base mb-4"
+                      style={{
+                        opacity: useTransform(certificationsLine1Progress, [0.1, 0.2], [0, 1])
+                      }}
+                    >
+                      Dec 15, 2025
+                    </motion.p>
+                    <motion.ul 
+                      className="text-foreground/80 text-lg leading-relaxed list-disc list-inside space-y-3 mb-4"
+                      style={{
+                        opacity: useTransform(certificationsLine1Progress, [0.2, 0.6], [0, 1])
+                      }}
+                    >
+                      <motion.li
+                        style={{
+                          opacity: useTransform(certificationsLine1Progress, [0.2, 0.35], [0, 1]),
+                          filter: useTransform(certificationsLine1Progress, [0.2, 0.35], ['blur(5px)', 'blur(0px)']),
+                          y: useTransform(certificationsLine1Progress, [0.2, 0.35], [20, 0])
+                        }}
+                      >
+                        Integrated Kafka into a Spring Boot microservice to consume and deserialize high-volume transaction messages using a configurable topic and embedded Kafka test framework.
+                      </motion.li>
+                      <motion.li
+                        style={{
+                          opacity: useTransform(certificationsLine1Progress, [0.3, 0.45], [0, 1]),
+                          filter: useTransform(certificationsLine1Progress, [0.3, 0.45], ['blur(5px)', 'blur(0px)']),
+                          y: useTransform(certificationsLine1Progress, [0.3, 0.45], [20, 0])
+                        }}
+                      >
+                        Implemented transaction validation and persistence logic with Spring Data JPA and an H2 SQL database, including entity modeling and balance updates across relational User records.
+                      </motion.li>
+                      <motion.li
+                        style={{
+                          opacity: useTransform(certificationsLine1Progress, [0.4, 0.55], [0, 1]),
+                          filter: useTransform(certificationsLine1Progress, [0.4, 0.55], ['blur(5px)', 'blur(0px)']),
+                          y: useTransform(certificationsLine1Progress, [0.4, 0.55], [20, 0])
+                        }}
+                      >
+                        Connected the service to an external REST Incentive API using RestTemplate, processing incentive responses and incorporating them into transactional workflows.
+                      </motion.li>
+                      <motion.li
+                        style={{
+                          opacity: useTransform(certificationsLine1Progress, [0.5, 0.65], [0, 1]),
+                          filter: useTransform(certificationsLine1Progress, [0.5, 0.65], ['blur(5px)', 'blur(0px)']),
+                          y: useTransform(certificationsLine1Progress, [0.5, 0.65], [20, 0])
+                        }}
+                      >
+                        Developed a REST endpoint for querying user balances, returning JSON responses through a Spring controller while maintaining clean architectural boundaries.
+                      </motion.li>
+                      <motion.li
+                        style={{
+                          opacity: useTransform(certificationsLine1Progress, [0.6, 0.75], [0, 1]),
+                          filter: useTransform(certificationsLine1Progress, [0.6, 0.75], ['blur(5px)', 'blur(0px)']),
+                          y: useTransform(certificationsLine1Progress, [0.6, 0.75], [20, 0])
+                        }}
+                      >
+                        Verified system behavior using Maven test suites and debugger-driven inspection, ensuring reliability across message ingestion, database operations, and external API interactions.
+                      </motion.li>
+                    </motion.ul>
+                    <motion.p 
+                      className="text-foreground/70 text-sm mb-4"
+                      style={{
+                        opacity: useTransform(certificationsLine1Progress, [0.75, 0.85], [0, 1]),
+                        filter: useTransform(certificationsLine1Progress, [0.75, 0.85], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(certificationsLine1Progress, [0.75, 0.85], [20, 0])
+                      }}
+                    >
+                      Verification Code: mbwqzMzvCS6JaJa3q
+                    </motion.p>
+                    <motion.div
+                      className="mt-4 cursor-pointer"
+                      onClick={() => window.open('/Portfolio/JPM_SW.png', '_blank')}
+                      style={{
+                        opacity: useTransform(certificationsLine1Progress, [0.85, 1.0], [0, 1]),
+                        filter: useTransform(certificationsLine1Progress, [0.85, 1.0], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(certificationsLine1Progress, [0.85, 1.0], [20, 0])
+                      }}
+                    >
+                      <span className="text-primary underline hover:text-primary/80 transition-colors">View Certificate</span>
+                      <span className="relative group ml-2">
+                        <span className="absolute left-1/2 top-full z-20 hidden group-hover:block w-64 p-2 bg-background border border-border rounded-lg shadow-lg mt-2 -translate-x-1/2 animate-fade-in">
+                          <img src="/Portfolio/JPM_SW.png" alt="JPMorgan Certificate Preview" className="w-full h-auto rounded-md object-contain" />
+                        </span>
                       </span>
-                    </span>
-                  </motion.p>
+                    </motion.div>
+                  </div>
                 </motion.div>
-                
+
+                {/* Palo Alto Networks Academy - Grouped */}
                 <motion.div
-                  className="relative"
+                  className="relative group"
                   style={{
                     opacity: certificationsLine2Progress,
                     filter: useTransform(certificationsLine2Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
                     y: useTransform(certificationsLine2Progress, [0, 1], [20, 0])
                   }}
                 >
-                  <motion.p 
-                    className="text-foreground/80 text-xl leading-relaxed"
-                    style={{
-                      background: useTransform(
-                        certificationsLine2Progress,
-                        [0, 1],
-                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
-                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
-                      )
-                    }}
-                  >
-                    Credential ID: 3ymKKfahiz
-                  </motion.p>
-                </motion.div>
+                  <div className="border-l-4 border-primary/30 pl-6 pb-6">
+                    <motion.h3 
+                      className="text-2xl font-bold text-foreground mb-4"
+                      style={{
+                        background: useTransform(
+                          certificationsLine2Progress,
+                          [0, 1],
+                          ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                           'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                        )
+                      }}
+                    >
+                      Palo Alto Networks Academy
+                    </motion.h3>
+                    
+                    {/* Network Security Fundamentals */}
+                    <motion.div
+                      className="mb-6"
+                      style={{
+                        opacity: useTransform(certificationsLine2Progress, [0.3, 0.6], [0, 1]),
+                        filter: useTransform(certificationsLine2Progress, [0.3, 0.6], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(certificationsLine2Progress, [0.3, 0.6], [20, 0])
+                      }}
+                    >
+                      <motion.p 
+                        className="text-primary font-semibold text-lg mb-1"
+                        style={{
+                          opacity: useTransform(certificationsLine2Progress, [0.4, 0.65], [0, 1]),
+                          filter: useTransform(certificationsLine2Progress, [0.4, 0.65], ['blur(5px)', 'blur(0px)']),
+                          y: useTransform(certificationsLine2Progress, [0.4, 0.65], [20, 0])
+                        }}
+                      >
+                        Network Security Fundamentals
+                      </motion.p>
+                      <motion.p 
+                        className="text-foreground/70 text-base mb-1"
+                        style={{
+                          opacity: useTransform(certificationsLine2Progress, [0.5, 0.7], [0, 1]),
+                          filter: useTransform(certificationsLine2Progress, [0.5, 0.7], ['blur(5px)', 'blur(0px)']),
+                          y: useTransform(certificationsLine2Progress, [0.5, 0.7], [20, 0])
+                        }}
+                      >
+                        Issued: October 11, 2025
+                      </motion.p>
+                      <motion.p 
+                        className="text-foreground/70 text-sm mb-4"
+                        style={{
+                          opacity: useTransform(certificationsLine2Progress, [0.6, 0.75], [0, 1]),
+                          filter: useTransform(certificationsLine2Progress, [0.6, 0.75], ['blur(5px)', 'blur(0px)']),
+                          y: useTransform(certificationsLine2Progress, [0.6, 0.75], [20, 0])
+                        }}
+                      >
+                        Credential ID: RUT6x5pmTM
+                      </motion.p>
+                      <motion.div
+                        className="cursor-pointer"
+                        onClick={() => window.open('/Portfolio/PACN.png', '_blank')}
+                        style={{
+                          opacity: useTransform(certificationsLine2Progress, [0.7, 0.8], [0, 1]),
+                          filter: useTransform(certificationsLine2Progress, [0.7, 0.8], ['blur(5px)', 'blur(0px)']),
+                          y: useTransform(certificationsLine2Progress, [0.7, 0.8], [20, 0])
+                        }}
+                      >
+                        <span className="text-primary underline hover:text-primary/80 transition-colors">View Certificate</span>
+                        <span className="relative group ml-2">
+                          <span className="absolute left-1/2 top-full z-20 hidden group-hover:block w-64 p-2 bg-background border border-border rounded-lg shadow-lg mt-2 -translate-x-1/2 animate-fade-in">
+                            <img src="/Portfolio/PACN.png" alt="Palo Alto Network Security Certificate Preview" className="w-full h-auto rounded-md object-contain" />
+                          </span>
+                        </span>
+                      </motion.div>
+                    </motion.div>
 
-                <motion.div
-                  className="relative"
-                  style={{
-                    opacity: certificationsLine3Progress,
-                    filter: useTransform(certificationsLine3Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
-                    y: useTransform(certificationsLine3Progress, [0, 1], [20, 0])
-                  }}
-                >
-                  <motion.p 
-                    className="text-foreground/80 text-xl leading-relaxed"
-                    style={{
-                      background: useTransform(
-                        certificationsLine3Progress,
-                        [0, 1],
-                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
-                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
-                      )
-                    }}
-                  >
-                    Issued: May 6, 2025
-                  </motion.p>
+                    {/* Cybersecurity Foundation */}
+                    <motion.div
+                      style={{
+                        opacity: useTransform(certificationsLine2Progress, [0.8, 1.0], [0, 1]),
+                        filter: useTransform(certificationsLine2Progress, [0.8, 1.0], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(certificationsLine2Progress, [0.8, 1.0], [20, 0])
+                      }}
+                    >
+                      <motion.p 
+                        className="text-primary font-semibold text-lg mb-1"
+                        style={{
+                          opacity: useTransform(certificationsLine2Progress, [0.85, 1.0], [0, 1]),
+                          filter: useTransform(certificationsLine2Progress, [0.85, 1.0], ['blur(5px)', 'blur(0px)']),
+                          y: useTransform(certificationsLine2Progress, [0.85, 1.0], [20, 0])
+                        }}
+                      >
+                        Cybersecurity Foundation
+                      </motion.p>
+                      <motion.p 
+                        className="text-foreground/70 text-base mb-1"
+                        style={{
+                          opacity: useTransform(certificationsLine2Progress, [0.9, 1.0], [0, 1]),
+                          filter: useTransform(certificationsLine2Progress, [0.9, 1.0], ['blur(5px)', 'blur(0px)']),
+                          y: useTransform(certificationsLine2Progress, [0.9, 1.0], [20, 0])
+                        }}
+                      >
+                        Issued: May 6, 2025
+                      </motion.p>
+                      <motion.p 
+                        className="text-foreground/70 text-sm mb-4"
+                        style={{
+                          opacity: useTransform(certificationsLine2Progress, [0.95, 1.0], [0, 1]),
+                          filter: useTransform(certificationsLine2Progress, [0.95, 1.0], ['blur(5px)', 'blur(0px)']),
+                          y: useTransform(certificationsLine2Progress, [0.95, 1.0], [20, 0])
+                        }}
+                      >
+                        Credential ID: 3ymKKfaihz
+                      </motion.p>
+                      <motion.div
+                        className="cursor-pointer"
+                        onClick={() => window.open('/Portfolio/PAC.png', '_blank')}
+                        style={{
+                          opacity: useTransform(certificationsLine2Progress, [0.98, 1.0], [0, 1]),
+                          filter: useTransform(certificationsLine2Progress, [0.98, 1.0], ['blur(5px)', 'blur(0px)']),
+                          y: useTransform(certificationsLine2Progress, [0.98, 1.0], [20, 0])
+                        }}
+                      >
+                        <span className="text-primary underline hover:text-primary/80 transition-colors">View Certificate</span>
+                        <span className="relative group ml-2">
+                          <span className="absolute left-1/2 top-full z-20 hidden group-hover:block w-64 p-2 bg-background border border-border rounded-lg shadow-lg mt-2 -translate-x-1/2 animate-fade-in">
+                            <img src="/Portfolio/PAC.png" alt="Palo Alto Cybersecurity Foundation Certificate Preview" className="w-full h-auto rounded-md object-contain" />
+                          </span>
+                        </span>
+                      </motion.div>
+                    </motion.div>
+                  </div>
                 </motion.div>
               </motion.div>
 
