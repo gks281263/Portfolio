@@ -10,17 +10,14 @@ import {
   Color3,
   ActionManager,
   ExecuteCodeAction,
-  Matrix,
   ParticleSystem,
   Texture,
   Color4,
   PointLight,
   DynamicTexture,
   Mesh,
-  LinesMesh,
   CreateLines,
   Animation,
-  SineEase,
   QuadraticEase,
   EasingFunction,
 } from '@babylonjs/core';
@@ -42,7 +39,8 @@ const BabylonScene: React.FC<BabylonSceneProps> = ({ type, className, scrollProg
   const globeRef = useRef<Mesh | null>(null);
   const skillIconsRef = useRef<Mesh[]>([]);
 
-  const createGlobe = (scene: Scene) => {
+  // @ts-ignore - Unused function, kept for potential future use
+  const _createGlobe = (scene: Scene) => {
     // Create the main globe with enhanced grid texture
     const sphere = MeshBuilder.CreateSphere('globe', { diameter: 2, segments: 64 }, scene);
     globeRef.current = sphere;
@@ -124,7 +122,8 @@ const BabylonScene: React.FC<BabylonSceneProps> = ({ type, className, scrollProg
   };
 
   // Helper function to create fade animation
-  const createFadeAnimation = (target: any, property: string, startValue: number, endValue: number, duration: number) => {
+  // @ts-ignore - Unused function, kept for potential future use
+  const _createFadeAnimation = (_target: any, property: string, startValue: number, endValue: number, duration: number) => {
     const animation = new Animation(
       `${property}Fade`,
       property,
@@ -349,7 +348,8 @@ const BabylonScene: React.FC<BabylonSceneProps> = ({ type, className, scrollProg
       engine.runRenderLoop(() => {
         try {
           const currentTime = performance.now();
-          const deltaTime = currentTime - lastTime;
+          // @ts-ignore - Unused variable, kept for potential future use
+          const _deltaTime = currentTime - lastTime;
           lastTime = currentTime;
 
           // Update scene
@@ -529,7 +529,8 @@ const createCyberpunkGrid = (scene: Scene) => {
 };
 
 // Enhanced data particles with better visual effects
-const createDataParticles = (scene: Scene) => {
+// @ts-ignore - Unused function, kept for potential future use
+const _createDataParticles = (scene: Scene) => {
   const particleSystem = new ParticleSystem('particles', 3000, scene);
   particleSystem.particleTexture = new Texture('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QUM2OEZDQTQ4RTU0MTFFMTlBNkQ5OTNBN0FFQzM5QjQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QUM2OEZDQTU4RTU0MTFFMTlBNkQ5OTNBN0FFQzM5QjQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpBQzY4RkNBMjhFNTQxMUUxOUE2RDk5M0E3QUVDMzlCNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpBQzY4RkNBMzhFNTQxMUUxOUE2RDk5M0E3QUVDMzlCNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PvXJ8OMAAAAmSURBVHjaYvz//z8DJYAFxjh16hSDiYkJw7t37xgYGRkZGBgYGADhZwMDAJg6BQAAAABJRU5ErkJggg==', scene);
   
