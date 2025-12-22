@@ -14,7 +14,7 @@ export const useScrollAnimation = (options: ScrollAnimationOptions = {}) => {
     rootMargin = '0px 0px -50px 0px',
     triggerOnce = true,
     delay = 0,
-    stagger = 0
+    stagger: _stagger = 0
   } = options;
 
   const elementRef = useRef<HTMLElement>(null);
