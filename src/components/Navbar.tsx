@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme } from './ThemeProvider';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
