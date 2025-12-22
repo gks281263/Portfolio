@@ -8,7 +8,7 @@ interface ThreeGlobeProps {
   scrollProgress?: number;
 }
 
-const ThreeGlobe: React.FC<ThreeGlobeProps> = ({ className, scrollProgress = 0 }) => {
+const ThreeGlobe: React.FC<ThreeGlobeProps> = ({ className, scrollProgress: _scrollProgress = 0 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const isMobileQuery = useMediaQuery({ maxWidth: 768 });
 
