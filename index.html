@@ -85,13 +85,17 @@
     <meta name="mobile-web-app-capable" content="yes" />
 
     <!-- Performance Enhancements -->
-    <link rel="preload" href="/Portfolio/assets/seo-banner.jpg" as="image" />
-    <link rel="preload" href="/Portfolio/src/main.tsx" as="script" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- DNS prefetch for external resources -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    
+    <!-- Preconnect to critical origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Fonts with display=swap for non-blocking load -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" /></noscript>
 
     <!-- Security Headers -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: 'unsafe-inline' 'unsafe-eval'; font-src https://fonts.gstatic.com; img-src 'self' https: data: http:; frame-src 'self' https://www.linkedin.com https://*.linkedin.com https://li.protechts.net https://www.youtube.com https://player.vimeo.com;" />

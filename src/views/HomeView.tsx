@@ -54,7 +54,7 @@ const skills: Skill[] = [
   },
   { 
     name: 'Authentication & Authorization', 
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jwt/jwt-original.svg',
+    logo: 'https://jwt.io/img/pic_logo.svg',
     color: '#4A90E2',
     category: 'Backend & Systems'
   },
@@ -180,6 +180,12 @@ const skills: Skill[] = [
     name: 'GitHub Actions', 
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
     color: '#2088FF',
+    category: 'DevOps'
+  },
+  { 
+    name: 'CI/CD Pipeline', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg',
+    color: '#D24939',
     category: 'DevOps'
   },
   // Security Tools
@@ -1422,6 +1428,15 @@ const Home: React.FC = () => {
                               src={skill.logo}
                               alt={skill.name}
                               className="w-full h-full object-contain filter dark:invert"
+                              onError={(e) => {
+                                // Fallback to a placeholder if image fails to load
+                                const target = e.target as HTMLImageElement;
+                                target.style.display = 'none';
+                                const parent = target.parentElement;
+                                if (parent) {
+                                  parent.innerHTML = `<div class="w-full h-full flex items-center justify-center text-xs font-bold" style="color: ${skill.color}">${skill.name.charAt(0)}</div>`;
+                                }
+                              }}
                             />
                           </PulseGlow>
                           <span className="text-xs sm:text-sm text-foreground/80 group-hover:text-foreground transition-colors text-center">

@@ -6,7 +6,7 @@ A modern, responsive portfolio website showcasing my skills, projects, and exper
 
 - 🎨 **Modern Dark Theme** - Sleek, professional design with glassmorphism effects
 - 📱 **Fully Responsive** - Optimized for all devices and screen sizes
-- ⚡ **Performance Optimized** - 120fps animations, optimized rendering, and performance hooks
+- ⚡ **Performance Optimized** - 120fps animations, optimized rendering, lazy loading
 - 🔒 **PWA Ready** - Service worker, offline support, and installable app
 - 🎯 **Interactive 3D Elements** - Three.js globe and Babylon.js 3D scenes
 - 🎭 **Advanced Animations** - Framer Motion with scroll-triggered effects
@@ -14,14 +14,14 @@ A modern, responsive portfolio website showcasing my skills, projects, and exper
 - 🎨 **Micro-interactions** - Floating cards, gradient text, pulse effects, and magnetic buttons
 - 📝 **Comprehensive Sections** - About, Education, Experience, Skills, Projects, and Contact
 - 🐍 **Python Automation** - CV generator script with PDF generation capabilities
-- 🚀 **Modern Development** - Vite, TypeScript, ESLint, and modern React patterns
+- 🚀 **Pure SPA Architecture** - State-driven navigation, persistent AppShell, no page reloads
 
 ## 🛠️ Tech Stack
 
 ### **Frontend Framework**
 - **React 19** - Latest React with concurrent features
 - **TypeScript 5.8** - Type-safe development
-- **React Router DOM 7** - Client-side routing
+- **Zustand 5.0** - Lightweight state management
 
 ### **Styling & UI**
 - **Tailwind CSS 3.3** - Utility-first CSS framework
@@ -32,12 +32,11 @@ A modern, responsive portfolio website showcasing my skills, projects, and exper
 - **Framer Motion 12.10** - Production-ready motion library
 - **Three.js 0.176** - 3D graphics library
 - **Babylon.js 8.7** - Advanced 3D engine
-- **React Babylon.js** - React wrapper for Babylon.js
 
 ### **Performance & Optimization**
 - **Vite 6.3** - Fast build tool and dev server
-- **Custom Performance Hooks** - FPS monitoring and optimization
-- **Scroll Animation Hooks** - Optimized scroll-based animations
+- **React.lazy** - Code splitting and lazy loading
+- **Suspense** - Optimized loading states
 
 ### **PWA & Service Worker**
 - **Service Worker** - Offline support and caching
@@ -69,18 +68,19 @@ Portfolio/
 │   └── index.html                  # Main HTML entry point
 │
 ├── 🐍 Python Scripts
-│   └── cv.py                       # Automated CV/Resume PDF generator
+│   ├── cv.py                       # Automated CV/Resume PDF generator
 │
 ├── 📁 Source Code (src/)
 │   ├── 🚀 Entry Points
-│   │   ├── main.tsx                # Application entry point
-│   │   ├── index.tsx               # React entry point
-│   │   ├── Root.tsx                # Root component
-│   │   └── App.tsx                 # Main application component
+│   │   └── main.tsx                # Application entry point
 │   │
 │   ├── 🎨 Styling
-│   │   ├── index.css               # Global CSS styles
-│   │   └── App.css                 # App-specific styles
+│   │   └── index.css               # Global CSS styles and animations
+│   │
+│   ├── 🏗️ Application Core (app/)
+│   │   ├── AppShell.tsx            # Persistent application shell
+│   │   ├── MainView.tsx            # State-driven view switcher
+│   │   └── store.ts                # Global state management (Zustand)
 │   │
 │   ├── 🧩 Components
 │   │   ├── Navbar.tsx              # Navigation component
@@ -89,28 +89,28 @@ Portfolio/
 │   │   ├── ThreeGlobe.tsx          # Three.js globe implementation
 │   │   ├── BabylonScene.tsx        # Babylon.js 3D scene
 │   │   ├── Footer.tsx              # Footer component
-│   │   ├── Loading.tsx             # Loading states
-│   │   ├── MobileMenu.tsx          # Mobile navigation menu
 │   │   ├── ScrollToTop.tsx         # Scroll to top button
 │   │   ├── ThemeProvider.tsx       # Theme context provider
 │   │   └── MicroInteractions.tsx   # Micro-interaction components
 │   │
-│   ├── 📄 Pages
-│   │   └── Home.tsx                # Main portfolio page
+│   ├── 📄 Views
+│   │   ├── HomeView.tsx            # Main portfolio view
+│   │   └── ThoughtsView.tsx        # Thoughts/Blog view
 │   │
-│   ├── 🪝 Custom Hooks
-│   │   ├── usePerformanceOptimization.ts  # Performance monitoring
-│   │   └── useScrollAnimation.ts           # Scroll-based animations
+│   ├── 📊 Data
+│   │   └── thoughts.ts             # Thoughts/Blog data
 │   │
 │   └── 🎯 Assets
-│       └── react.svg               # React logo
+│       └── (assets directory)
 │
 ├── 🌐 Public Assets (public/)
 │   ├── sw.js                       # Service worker
 │   ├── site.webmanifest            # PWA manifest
 │   ├── GK.jpeg                     # Profile image
+│   ├── profile.jpg                  # Profile image
 │   ├── GCV.pdf                     # Resume/CV
-│   ├── PAC.png                     # Certificate
+│   ├── PAC.png, PACN.png           # Certificates
+│   ├── JPM_SW.png                  # Project image
 │   ├── 🌍 Earth Textures
 │   │   ├── earth-blue-marble.jpg   # Earth texture
 │   │   ├── earth-clouds.png        # Cloud layer
@@ -118,12 +118,15 @@ Portfolio/
 │   │   └── earth-topology.png      # Topography map
 │   └── 📁 projects/                # Project images
 │
+├── 📜 Scripts
+│   └── copy-404.js                 # 404.html generator for SPA routing
+│
 ├── 📦 Build Output
-│   ├── dist/                       # Production build
-│   └── node_modules/               # Dependencies
+│   └── dist/                       # Production build
 │
 └── 📚 Documentation
     ├── README.md                   # This file
+    ├── ARCHITECTURE.md             # Architecture documentation
     └── LICENSE                     # MIT License
 ```
 
@@ -170,14 +173,16 @@ Portfolio/
 ## 🎨 Customization
 
 ### **Personal Information**
-- Update profile details in `src/pages/Home.tsx`
+- Update profile details in `src/views/HomeView.tsx`
 - Modify skills, projects, and experience sections
 - Update contact information and social links
+- Edit thoughts/blog content in `src/data/thoughts.ts`
 
 ### **Styling & Theme**
 - Customize colors in `tailwind.config.js`
 - Modify global styles in `src/index.css`
 - Update component-specific styles
+- Adjust animation timings for mobile/desktop
 
 ### **3D Elements**
 - Adjust globe settings in `src/components/ThreeGlobe.tsx`
@@ -186,8 +191,8 @@ Portfolio/
 
 ### **Animations**
 - Customize Framer Motion animations in components
-- Modify scroll triggers in `src/hooks/useScrollAnimation.ts`
-- Adjust performance settings in `src/hooks/usePerformanceOptimization.ts`
+- Modify micro-interactions in `src/components/MicroInteractions.tsx`
+- Adjust pulse glow animation speeds for mobile/desktop
 
 ### **PWA Configuration**
 - Update `public/site.webmanifest` for app details
@@ -195,8 +200,8 @@ Portfolio/
 - Update icons and splash screens
 
 ### **Python Scripts**
-- Customize CV content in `cv.py`
-- Modify styling and formatting in the script
+- Customize CV content in `cv.py` or `SCV.py`
+- Modify styling and formatting in the scripts
 - Add new sections or modify existing ones
 - Install required Python dependencies: `pip install reportlab`
 
@@ -211,31 +216,34 @@ Portfolio/
 
 ### **Python Scripts**
 - `python cv.py` - Generate professional CV PDF
+- `python SCV.py` - Generate additional CV variant
 - Install dependencies: `pip install reportlab`
 
 ### **Code Quality**
 - **ESLint** - Code linting and style enforcement
 - **TypeScript** - Static type checking
-- **Prettier** - Code formatting (via Tailwind CSS)
+- **Tailwind CSS** - Utility-first styling
 
 ### **Performance Features**
 - **120fps Animations** - Optimized for high refresh rate displays
-- **Scroll Optimization** - Efficient scroll-based animations
-- **Lazy Loading** - Optimized asset loading
+- **Lazy Loading** - Views loaded on-demand with React.lazy
+- **Code Splitting** - Automatic chunk optimization
 - **PWA Caching** - Intelligent resource caching
+- **Mobile Optimizations** - Reduced animation intensity on mobile
 
 ## 🌟 Key Components
+
+### **Application Core**
+- **AppShell.tsx** - Persistent application shell that never remounts
+- **MainView.tsx** - State-driven view switcher with lazy loading
+- **store.ts** - Global state management with Zustand and persistence
 
 ### **MicroInteractions.tsx**
 - Floating cards with physics
 - Gradient text effects
-- Pulse glow animations
+- Pulse glow animations (mobile-optimized)
 - Magnetic button interactions
 - Scroll-triggered animations
-
-### **Performance Hooks**
-- **usePerformanceOptimization** - FPS monitoring and optimization
-- **useScrollAnimation** - Scroll-based animation triggers
 
 ### **3D Graphics**
 - **ThreeGlobe.tsx** - Interactive 3D globe
@@ -244,6 +252,7 @@ Portfolio/
 
 ### **Python Automation**
 - **cv.py** - Automated CV/Resume PDF generator using ReportLab
+- **SCV.py** - Additional CV generation script
   - ATS-friendly formatting with hidden keywords
   - Professional styling and consistent layout
   - Automated content generation from structured data
@@ -260,9 +269,10 @@ Portfolio/
 
 - **Vite Build** - Fast development and optimized builds
 - **Tree Shaking** - Unused code elimination
-- **Code Splitting** - Lazy-loaded components
-- **Image Optimization** - Optimized asset loading
+- **Code Splitting** - Lazy-loaded views and components
+- **Image Optimization** - Optimized asset loading with error handling
 - **CSS Optimization** - Purged unused styles
+- **Mobile-Specific** - Reduced animation intensity on mobile devices
 
 ## 🤝 Contributing
 

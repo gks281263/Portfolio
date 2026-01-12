@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { HashRouter } from 'react-router-dom';
-import App from './App';
+import AppShell from './app/AppShell';
 import './index.css';
 
 // Register service worker for PWA
@@ -17,10 +16,14 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+/**
+ * Application Entry Point
+ * 
+ * CRITICAL: AppShell mounts once and persists for the entire session.
+ * No routing wrapper. Pure SPA architecture.
+ */
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <HashRouter>
-      <App />
-    </HashRouter>
+    <AppShell />
   </React.StrictMode>
 );
