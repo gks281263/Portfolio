@@ -5,28 +5,24 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/copy-404.js",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "vite build && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
     "@babylonjs/core": "^8.7.0",
     "@babylonjs/gui": "^8.7.0",
     "@babylonjs/loaders": "^8.7.0",
-    "@headlessui/react": "^2.2.2",
-    "@heroicons/react": "^2.2.0",
     "@tailwindcss/typography": "^0.5.16",
     "@types/react-responsive": "^8.0.8",
     "@types/three": "^0.176.0",
     "framer-motion": "^12.10.4",
     "react": "^19.1.0",
-    "react-babylonjs": "^3.2.4",
     "react-dom": "^19.1.0",
     "react-responsive": "^10.0.1",
-    "react-router-dom": "^7.6.0",
     "three": "^0.176.0",
-    "typewriter-effect": "^2.22.0"
+    "zustand": "^5.0.9"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
@@ -41,6 +37,7 @@
     "globals": "^16.0.0",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.3.0",
+    "terser": "^5.44.1",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5"
