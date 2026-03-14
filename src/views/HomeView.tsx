@@ -153,6 +153,18 @@ const skills: Skill[] = [
   },
   // DevOps
   { 
+    name: 'Terraform (IaC)', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg',
+    color: '#7B42BC',
+    category: 'DevOps'
+  },
+  { 
+    name: 'AWS (VPC, ECS, RDS, S3, WAF, KMS)', 
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/250px-Amazon_Web_Services_Logo.svg.png',
+    color: '#FF9900',
+    category: 'DevOps'
+  },
+  { 
     name: 'Docker', 
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
     color: '#2496ED',
@@ -165,27 +177,15 @@ const skills: Skill[] = [
     category: 'DevOps'
   },
   { 
-    name: 'AWS', 
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/250px-Amazon_Web_Services_Logo.svg.png',
-    color: '#FF9900',
-    category: 'DevOps'
-  },
-  { 
     name: 'Git', 
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
     color: '#F05032',
     category: 'DevOps'
   },
   { 
-    name: 'GitHub Actions', 
+    name: 'GitHub Actions CI/CD', 
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
     color: '#2088FF',
-    category: 'DevOps'
-  },
-  { 
-    name: 'CI/CD Pipeline', 
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg',
-    color: '#D24939',
     category: 'DevOps'
   },
   // Security Tools
@@ -271,13 +271,6 @@ const projects: Project[] = [
     technologies: ['Rust', 'Telegram Bot API'],
     image: './assets/projects/keylogger.jpg',
     link: 'https://github.com/yourusername/telegram-keylogger'
-  },
-  {
-    title: 'E-Commerce Platform (Django)',
-    description: 'Built a secure e-commerce web app with user authentication, product management, and an admin panel.',
-    technologies: ['Django', 'Python', 'PostgreSQL', 'Bootstrap'],
-    image: './assets/projects/ecommerce.jpg',
-    link: 'https://github.com/yourusername/ecommerce-platform'
   },
   {
     title: 'Peer-to-Peer Lending Platform (React + Django)',
@@ -401,12 +394,14 @@ const Home: React.FC = () => {
   const educationLine3Progress = useTransform(educationScrollProgress, 
     isMobile ? [0.3, 0.5] : [0.5, 0.6], [0, 1]);
 
-  const experienceLine1Progress = useTransform(experienceScrollProgress, 
-    isMobile ? [0, 0.2] : [0, 0.25], [0, 1]);
-  const experienceLine2Progress = useTransform(experienceScrollProgress, 
-    isMobile ? [0.2, 0.4] : [0.4, 0.5], [0, 1]);
-  const experienceLine3Progress = useTransform(experienceScrollProgress, 
-    isMobile ? [0.3, 0.5] : [0.5, 0.6], [0, 1]);
+  const experienceLine1Progress = useTransform(experienceScrollProgress,
+    isMobile ? [0, 0.15] : [0, 0.15], [0, 1]);
+  const experienceLine2Progress = useTransform(experienceScrollProgress,
+    isMobile ? [0.15, 0.3] : [0.15, 0.3], [0, 1]);
+  const experienceLine3Progress = useTransform(experienceScrollProgress,
+    isMobile ? [0.3, 0.45] : [0.35, 0.5], [0, 1]);
+  const experienceLine4Progress = useTransform(experienceScrollProgress,
+    isMobile ? [0.45, 0.6] : [0.5, 0.65], [0, 1]);
 
 
   const certificationsLine1Progress = useTransform(certificationsScrollProgress, 
@@ -614,7 +609,7 @@ const Home: React.FC = () => {
                       )
                     }}
                   >
-                    Driven second-year Computer Science student specializing in <strong>Cyber Security</strong>, with hands-on experience in <strong>full-stack development</strong>, <strong>workflow automation</strong>, <strong>penetration testing</strong>, and <strong>malware analysis</strong>. My expertise lies in integrating robust security protocols with seamless user experiences, ensuring every application is both resilient and intuitive.
+                    Backend and Platform Engineer specializing in <strong>Cyber Security</strong>, with production experience building <strong>system architecture</strong>, <strong>cloud infrastructure (AWS + Terraform)</strong>, <strong>financial systems</strong>, and <strong>secure API platforms</strong>. My expertise lies in designing resilient backends with immutable data patterns, least-privilege security, and production-grade Infrastructure as Code.
                   </motion.p>
                 </motion.div>
                 
@@ -638,7 +633,7 @@ const Home: React.FC = () => {
                       )
                     }}
                   >
-                    Co-founded a marketing startup, developing <strong>backend systems</strong>, optimizing processes, and scaling digital tools. With a deep command of modern web technologies and cybersecurity best practices, I specialize in architecting applications that are visually compelling and fortified against evolving threats.
+                    Built and deployed a complete event platform backend from scratch — <strong>Django + FastAPI hybrid</strong> serving 9 domain-isolated apps, <strong>Terraform-provisioned AWS infrastructure</strong> (VPC, ECS Fargate, RDS, ElastiCache, WAF, KMS), and <strong>CI/CD pipelines</strong> with GitHub Actions. Previously co-founded a startup, leading a 15-member team and automating operations.
                   </motion.p>
                 </motion.div>
 
@@ -662,7 +657,7 @@ const Home: React.FC = () => {
                       )
                     }}
                   >
-                    Passionate about <strong>secure software design</strong>, <strong>API development</strong>, and <strong>ethical hacking</strong>. Eager to secure an internship to further enhance cybersecurity and backend expertise while delivering high-impact, scalable solutions that exceed expectations in both functionality and security.
+                    Passionate about <strong>secure software design</strong>, <strong>cloud-native infrastructure</strong>, and <strong>data integrity engineering</strong>. Focused on building systems with transaction atomicity, state machine-driven workflows, and enterprise-grade security — from WAF rules and secrets management to webhook verification and audit logging.
                   </motion.p>
                 </motion.div>
               </motion.div>
@@ -805,7 +800,7 @@ const Home: React.FC = () => {
               </motion.h2>
               
               <motion.div className="space-y-12">
-                {/* First Experience - Loopinx Circle */}
+                {/* First Experience - Platform Engineer at Loopinx */}
                 <motion.div
                   className="relative border-l-4 border-primary/30 pl-6 pb-8"
                   style={{
@@ -827,9 +822,9 @@ const Home: React.FC = () => {
                       )
                     }}
                   >
-                    <h3 className="text-2xl font-bold text-foreground mb-2">Backend Developer Intern</h3>
+                    <h3 className="text-2xl font-bold text-foreground mb-2">Platform Engineer Intern</h3>
                     <p className="text-primary font-semibold text-lg mb-1">Loopinx Circle</p>
-                    <p className="text-foreground/70 text-base">Oct 2025 – Dec 2025</p>
+                    <p className="text-foreground/70 text-base">Jan 2026 – March 2026</p>
                   </motion.div>
 
                   <motion.ul 
@@ -845,80 +840,44 @@ const Home: React.FC = () => {
                   >
                     <motion.li
                       style={{
-                        opacity: useTransform(experienceLine1Progress, [0.1, 0.2], [0, 1]),
-                        filter: useTransform(experienceLine1Progress, [0.1, 0.2], ['blur(5px)', 'blur(0px)']),
-                        y: useTransform(experienceLine1Progress, [0.1, 0.2], [20, 0])
+                        opacity: useTransform(experienceLine1Progress, [0.1, 0.3], [0, 1]),
+                        filter: useTransform(experienceLine1Progress, [0.1, 0.3], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine1Progress, [0.1, 0.3], [20, 0])
                       }}
                     >
-                      Architected and built the complete backend system from scratch using Django (ORM, admin, domain logic) and FastAPI (external APIs), following a modular monolith architecture with clear domain isolation.
+                      <strong>Authored production-grade Infrastructure as Code using Terraform</strong>, provisioning a complete AWS stack — VPC with multi-AZ public/private subnets, ECS Fargate, RDS PostgreSQL, ElastiCache Redis (TLS + auth), ALB (TLS 1.2/1.3), S3, ECR with lifecycle policies, and KMS encryption.
                     </motion.li>
                     <motion.li
                       style={{
-                        opacity: useTransform(experienceLine1Progress, [0.2, 0.3], [0, 1]),
-                        filter: useTransform(experienceLine1Progress, [0.2, 0.3], ['blur(5px)', 'blur(0px)']),
-                        y: useTransform(experienceLine1Progress, [0.2, 0.3], [20, 0])
+                        opacity: useTransform(experienceLine1Progress, [0.3, 0.5], [0, 1]),
+                        filter: useTransform(experienceLine1Progress, [0.3, 0.5], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine1Progress, [0.3, 0.5], [20, 0])
                       }}
                     >
-                      Designed system architecture, database schema, and detailed ER diagrams; produced structured technical documentation to enable team onboarding and future scaling.
+                      <strong>Implemented least-privilege security architecture</strong>: WAF with AWS managed rules and rate limiting, security groups restricting data stores to ECS-only access, VPC endpoints to eliminate public internet egress, and S3 bucket policies scoped to ECS task IAM roles.
                     </motion.li>
                     <motion.li
                       style={{
-                        opacity: useTransform(experienceLine1Progress, [0.3, 0.4], [0, 1]),
-                        filter: useTransform(experienceLine1Progress, [0.3, 0.4], ['blur(5px)', 'blur(0px)']),
-                        y: useTransform(experienceLine1Progress, [0.3, 0.4], [20, 0])
+                        opacity: useTransform(experienceLine1Progress, [0.5, 0.7], [0, 1]),
+                        filter: useTransform(experienceLine1Progress, [0.5, 0.7], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine1Progress, [0.5, 0.7], [20, 0])
                       }}
                     >
-                      Implemented a hybrid Django + FastAPI setup via ASGI, mounting FastAPI at /api for mobile clients while retaining Django for core business logic and admin operations.
+                      <strong>Designed CI/CD pipelines using GitHub Actions</strong> for automated ECR image builds and ECS force-new-deployment with concurrency control, deployment circuit breakers, and Container Insights monitoring.
                     </motion.li>
                     <motion.li
                       style={{
-                        opacity: useTransform(experienceLine1Progress, [0.4, 0.5], [0, 1]),
-                        filter: useTransform(experienceLine1Progress, [0.4, 0.5], ['blur(5px)', 'blur(0px)']),
-                        y: useTransform(experienceLine1Progress, [0.4, 0.5], [20, 0])
+                        opacity: useTransform(experienceLine1Progress, [0.7, 0.9], [0, 1]),
+                        filter: useTransform(experienceLine1Progress, [0.7, 0.9], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine1Progress, [0.7, 0.9], [20, 0])
                       }}
                     >
-                      Built a secure phone-based OTP authentication system using Twilio SMS with expiry handling, attempt limits, unified signup/login flow, and JWT-based authentication.
-                    </motion.li>
-                    <motion.li
-                      style={{
-                        opacity: useTransform(experienceLine1Progress, [0.5, 0.6], [0, 1]),
-                        filter: useTransform(experienceLine1Progress, [0.5, 0.6], ['blur(5px)', 'blur(0px)']),
-                        y: useTransform(experienceLine1Progress, [0.5, 0.6], [20, 0])
-                      }}
-                    >
-                      Designed and implemented financial payout workflows using an immutable snapshot pattern to preserve transactional integrity at request time.
-                    </motion.li>
-                    <motion.li
-                      style={{
-                        opacity: useTransform(experienceLine1Progress, [0.6, 0.7], [0, 1]),
-                        filter: useTransform(experienceLine1Progress, [0.6, 0.7], ['blur(5px)', 'blur(0px)']),
-                        y: useTransform(experienceLine1Progress, [0.6, 0.7], [20, 0])
-                      }}
-                    >
-                      Developed REST APIs with validation, pagination, filtering, and query optimization using select_related and prefetch_related to eliminate N+1 query issues.
-                    </motion.li>
-                    <motion.li
-                      style={{
-                        opacity: useTransform(experienceLine1Progress, [0.7, 0.8], [0, 1]),
-                        filter: useTransform(experienceLine1Progress, [0.7, 0.8], ['blur(5px)', 'blur(0px)']),
-                        y: useTransform(experienceLine1Progress, [0.7, 0.8], [20, 0])
-                      }}
-                    >
-                      Implemented role-based and object-level authorization, custom middleware for authentication, request logging, and global exception handling.
-                    </motion.li>
-                    <motion.li
-                      style={{
-                        opacity: useTransform(experienceLine1Progress, [0.8, 0.9], [0, 1]),
-                        filter: useTransform(experienceLine1Progress, [0.8, 0.9], ['blur(5px)', 'blur(0px)']),
-                        y: useTransform(experienceLine1Progress, [0.8, 0.9], [20, 0])
-                      }}
-                    >
-                      Containerized the application using Docker Compose and configured production-ready deployment with Nginx and environment-based settings.
+                      <strong>Configured centralized secrets management</strong> via AWS Secrets Manager, structured JSON logging to CloudWatch, multi-stage Docker builds with non-root execution, and strict entrypoint scripts with DB wait loops and migration control for production hardening.
                     </motion.li>
                   </motion.ul>
                 </motion.div>
 
-                {/* Second Experience - AiiQA */}
+                {/* Second Experience - Backend Developer at Loopinx */}
                 <motion.div
                   className="relative border-l-4 border-primary/30 pl-6 pb-8"
                   style={{
@@ -941,8 +900,8 @@ const Home: React.FC = () => {
                     }}
                   >
                     <h3 className="text-2xl font-bold text-foreground mb-2">Backend Developer Intern</h3>
-                    <p className="text-primary font-semibold text-lg mb-1">AiiQA Powered by Code2Tech Innovation Pvt. Ltd</p>
-                    <p className="text-foreground/70 text-base">May 2025 - Aug 2025</p>
+                    <p className="text-primary font-semibold text-lg mb-1">Loopinx Circle</p>
+                    <p className="text-foreground/70 text-base">Oct 2025 – Dec 2025</p>
                   </motion.div>
 
                   <motion.ul 
@@ -958,46 +917,46 @@ const Home: React.FC = () => {
                   >
                     <motion.li
                       style={{
-                        opacity: useTransform(experienceLine2Progress, [0.3, 0.4], [0, 1]),
-                        filter: useTransform(experienceLine2Progress, [0.3, 0.4], ['blur(5px)', 'blur(0px)']),
-                        y: useTransform(experienceLine2Progress, [0.3, 0.4], [20, 0])
+                        opacity: useTransform(experienceLine2Progress, [0.1, 0.3], [0, 1]),
+                        filter: useTransform(experienceLine2Progress, [0.1, 0.3], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine2Progress, [0.1, 0.3], [20, 0])
                       }}
                     >
-                      <strong>Developed robust backend services and RESTful APIs</strong> using Django Rest Framework (DRF), implementing comprehensive data models, serializers, and view sets for scalable web applications.
+                      <strong>Designed and built a modular monolith backend from scratch</strong> using a Django + FastAPI hybrid architecture, owning system design, database modeling, and 38+ technical documentation files across 9 domain-isolated Django apps (events, users, payments, attendances, notifications, support, audit, analytics, core).
                     </motion.li>
                     <motion.li
                       style={{
-                        opacity: useTransform(experienceLine2Progress, [0.4, 0.5], [0, 1]),
-                        filter: useTransform(experienceLine2Progress, [0.4, 0.5], ['blur(5px)', 'blur(0px)']),
-                        y: useTransform(experienceLine2Progress, [0.4, 0.5], [20, 0])
+                        opacity: useTransform(experienceLine2Progress, [0.3, 0.5], [0, 1]),
+                        filter: useTransform(experienceLine2Progress, [0.3, 0.5], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine2Progress, [0.3, 0.5], [20, 0])
                       }}
                     >
-                      <strong>Dockerized the complete project infrastructure</strong> for consistent deployment across different environments, creating optimized Docker containers and docker-compose configurations for seamless CI/CD integration.
+                      <strong>Engineered a financial system with immutable snapshot patterns</strong>, transaction atomicity across 51+ operations, payment retry chains with parent-order tracking, and PayU webhook verification (hash + IP validation + rate limiting) ensuring data integrity and auditability.
                     </motion.li>
                     <motion.li
                       style={{
-                        opacity: useTransform(experienceLine2Progress, [0.5, 0.6], [0, 1]),
-                        filter: useTransform(experienceLine2Progress, [0.5, 0.6], ['blur(5px)', 'blur(0px)']),
-                        y: useTransform(experienceLine2Progress, [0.5, 0.6], [20, 0])
+                        opacity: useTransform(experienceLine2Progress, [0.5, 0.7], [0, 1]),
+                        filter: useTransform(experienceLine2Progress, [0.5, 0.7], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine2Progress, [0.5, 0.7], [20, 0])
                       }}
                     >
-                      <strong>Designed and implemented secure software architecture</strong> with authentication, authorization, and data validation while optimizing code performance through database query optimization and caching strategies.
+                      <strong>Built a state machine-driven support system</strong> with validated transitions, concurrency control via select_for_update, reopen abuse detection, and a JSON-based rule engine with dot-notation field resolution, policy scoping, SLA tracking, and cooldown enforcement.
                     </motion.li>
                     <motion.li
                       style={{
-                        opacity: useTransform(experienceLine2Progress, [0.6, 0.7], [0, 1]),
-                        filter: useTransform(experienceLine2Progress, [0.6, 0.7], ['blur(5px)', 'blur(0px)']),
-                        y: useTransform(experienceLine2Progress, [0.6, 0.7], [20, 0])
+                        opacity: useTransform(experienceLine2Progress, [0.7, 0.9], [0, 1]),
+                        filter: useTransform(experienceLine2Progress, [0.7, 0.9], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine2Progress, [0.7, 0.9], [20, 0])
                       }}
                     >
-                      <strong>Collaborated on comprehensive API documentation</strong> and system integration for scalable applications, ensuring seamless communication between frontend and backend systems with proper error handling and logging.
+                      <strong>Implemented secure authentication and authorization</strong> (phone OTP with rate limiting + expiry, JWT, RBAC, object-level permissions), a custom exception hierarchy with 10 typed exceptions, and comprehensive Django admin customization across all 9 apps with custom forms, bulk actions, and analytics dashboards.
                     </motion.li>
                   </motion.ul>
                 </motion.div>
 
-                {/* Third Experience - Co-Founder */}
+                {/* Third Experience - AiiQA */}
                 <motion.div
-                  className="relative border-l-4 border-primary/30 pl-6"
+                  className="relative border-l-4 border-primary/30 pl-6 pb-8"
                   style={{
                     opacity: experienceLine3Progress,
                     filter: useTransform(experienceLine3Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
@@ -1017,9 +976,9 @@ const Home: React.FC = () => {
                       )
                     }}
                   >
-                    <h3 className="text-2xl font-bold text-foreground mb-2">Co-Founder</h3>
-                    <p className="text-primary font-semibold text-lg mb-1">Promotionia (Startup)</p>
-                    <p className="text-foreground/70 text-base">June 2023 – March 2025</p>
+                    <h3 className="text-2xl font-bold text-foreground mb-2">Backend Developer Intern</h3>
+                    <p className="text-primary font-semibold text-lg mb-1">AiiQA Powered by Code2Tech Innovation Pvt. Ltd</p>
+                    <p className="text-foreground/70 text-base">May 2025 - Aug 2025</p>
                   </motion.div>
 
                   <motion.ul 
@@ -1040,7 +999,7 @@ const Home: React.FC = () => {
                         y: useTransform(experienceLine3Progress, [0.3, 0.4], [20, 0])
                       }}
                     >
-                      Engineered and launched two full-stack marketing platforms with advanced order processing and SEO optimization, driving measurable business growth.
+                      <strong>Developed robust backend services and RESTful APIs</strong> using Django Rest Framework (DRF), implementing comprehensive data models, serializers, and view sets for scalable web applications.
                     </motion.li>
                     <motion.li
                       style={{
@@ -1049,7 +1008,7 @@ const Home: React.FC = () => {
                         y: useTransform(experienceLine3Progress, [0.4, 0.5], [20, 0])
                       }}
                     >
-                      Automated Instagram account management and internal workflows using Python and Google Sheets, reducing manual workload by 90% and boosting operational efficiency.
+                      <strong>Dockerized the complete project infrastructure</strong> for consistent deployment across different environments, creating optimized Docker containers and docker-compose configurations for seamless CI/CD integration.
                     </motion.li>
                     <motion.li
                       style={{
@@ -1058,13 +1017,90 @@ const Home: React.FC = () => {
                         y: useTransform(experienceLine3Progress, [0.5, 0.6], [20, 0])
                       }}
                     >
-                      Led and mentored a 15-member marketing team, fostering a culture of innovation and achieving a 30% improvement in team productivity.
+                      <strong>Designed and implemented secure software architecture</strong> with authentication, authorization, and data validation while optimizing code performance through database query optimization and caching strategies.
                     </motion.li>
                     <motion.li
                       style={{
                         opacity: useTransform(experienceLine3Progress, [0.6, 0.7], [0, 1]),
                         filter: useTransform(experienceLine3Progress, [0.6, 0.7], ['blur(5px)', 'blur(0px)']),
                         y: useTransform(experienceLine3Progress, [0.6, 0.7], [20, 0])
+                      }}
+                    >
+                      <strong>Collaborated on comprehensive API documentation</strong> and system integration for scalable applications, ensuring seamless communication between frontend and backend systems with proper error handling and logging.
+                    </motion.li>
+                  </motion.ul>
+                </motion.div>
+
+                {/* Fourth Experience - Co-Founder */}
+                <motion.div
+                  className="relative border-l-4 border-primary/30 pl-6"
+                  style={{
+                    opacity: experienceLine4Progress,
+                    filter: useTransform(experienceLine4Progress, [0, 1], ['blur(5px)', 'blur(0px)']),
+                    y: useTransform(experienceLine4Progress, [0, 1], [20, 0])
+                  }}
+                >
+                  <div className="absolute left-[-8px] top-0 w-4 h-4 bg-primary rounded-full border-2 border-background"></div>
+                  
+                  <motion.div 
+                    className="mb-4"
+                    style={{
+                      background: useTransform(
+                        experienceLine4Progress,
+                        [0, 1],
+                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                      )
+                    }}
+                  >
+                    <h3 className="text-2xl font-bold text-foreground mb-2">Ex Co-Founder</h3>
+                    <p className="text-primary font-semibold text-lg mb-1">Promotionia (Startup – Closed)</p>
+                    <p className="text-foreground/70 text-base">June 2023 – March 2025</p>
+                  </motion.div>
+
+                  <motion.ul 
+                    className="text-foreground/80 text-lg leading-relaxed list-disc list-inside space-y-3"
+                    style={{
+                      background: useTransform(
+                        experienceLine4Progress,
+                        [0, 1],
+                        ['linear-gradient(90deg, transparent 0%, transparent 100%)', 
+                         'linear-gradient(90deg, rgba(var(--primary-rgb), 0.2) 0%, transparent 100%)']
+                      )
+                    }}
+                  >
+                    <motion.li
+                      style={{
+                        opacity: useTransform(experienceLine4Progress, [0.3, 0.4], [0, 1]),
+                        filter: useTransform(experienceLine4Progress, [0.3, 0.4], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine4Progress, [0.3, 0.4], [20, 0])
+                      }}
+                    >
+                      Engineered and launched two full-stack marketing platforms with advanced order processing and SEO optimization, driving measurable business growth.
+                    </motion.li>
+                    <motion.li
+                      style={{
+                        opacity: useTransform(experienceLine4Progress, [0.4, 0.5], [0, 1]),
+                        filter: useTransform(experienceLine4Progress, [0.4, 0.5], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine4Progress, [0.4, 0.5], [20, 0])
+                      }}
+                    >
+                      Automated Instagram account management and internal workflows using Python and Google Sheets, reducing manual workload by 90% and boosting operational efficiency.
+                    </motion.li>
+                    <motion.li
+                      style={{
+                        opacity: useTransform(experienceLine4Progress, [0.5, 0.6], [0, 1]),
+                        filter: useTransform(experienceLine4Progress, [0.5, 0.6], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine4Progress, [0.5, 0.6], [20, 0])
+                      }}
+                    >
+                      Led and mentored a 15-member marketing team, fostering a culture of innovation and achieving a 30% improvement in team productivity.
+                    </motion.li>
+                    <motion.li
+                      style={{
+                        opacity: useTransform(experienceLine4Progress, [0.6, 0.7], [0, 1]),
+                        filter: useTransform(experienceLine4Progress, [0.6, 0.7], ['blur(5px)', 'blur(0px)']),
+                        y: useTransform(experienceLine4Progress, [0.6, 0.7], [20, 0])
                       }}
                     >
                       Strengthened brand identity and digital presence across multiple platforms, resulting in increased engagement and market reach.
