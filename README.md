@@ -1,6 +1,6 @@
 # Gaurav Kumar's Portfolio Website
 
-A modern, responsive portfolio website showcasing my skills, projects, and experience as a cybersecurity specialist and full-stack developer. Built with React 19, TypeScript, and cutting-edge web technologies including 3D graphics, PWA capabilities, and performance optimizations.
+A modern, responsive portfolio website showcasing my skills, projects, and experience as a Backend & Platform Engineer with a Cyber Security specialization. Built with React 19, TypeScript, and cutting-edge web technologies including 3D graphics, PWA capabilities, and performance optimizations.
 
 ## 🌟 Features
 
@@ -252,8 +252,6 @@ Portfolio/
 
 ### **Python Automation**
 - **cv.py** - Automated CV/Resume PDF generator using ReportLab
-- **SCV.py** - Additional CV generation script
-  - ATS-friendly formatting with hidden keywords
   - Professional styling and consistent layout
   - Automated content generation from structured data
 
